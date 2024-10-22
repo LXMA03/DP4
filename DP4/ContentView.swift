@@ -9,16 +9,37 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            HomeView()  // Home Screen
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+            
+            RewardsView()  // Rewards Screen
+                .tabItem {
+                    Image(systemName: "gift.fill")
+                    Text("Rewards")
+                }
+            
+            CompetitionView()  // Competition Screen
+                .tabItem {
+                    Image(systemName: "trophy.fill")
+                    Text("Competition")
+                }
+            
+            FriendsView()  // Friends Screen
+                .tabItem {
+                    Image(systemName: "person.2.fill")
+                    Text("Friends")
+                }
+            
+            ProfileView()  // Profile Screen
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("Profile")
+                }
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
-}
