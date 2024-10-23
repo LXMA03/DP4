@@ -30,24 +30,23 @@ struct HomeView: View {
             .navigationTitle("Settings")
             
             .toolbar {
+                // Settings button to navigate to settings
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        // Action for menu button
-                        print("Menu button tapped")
-                    }) {
-                        // Icon for menu button
-                        Image(systemName: "line.horizontal.3")
+                    NavigationLink(destination: SettingView()) {
+                        // Icon for settings
+                        Image(systemName: "gearshape")
                             .imageScale(.large)
-                            .font(.system(size: 30))
+                            .font(.system(size: 24))
                     }
                 }
             }
         }
     }
 }
-
+    
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
     }
 }
+
