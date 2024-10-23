@@ -95,7 +95,7 @@ struct Option1View: View {
             Spacer()
         }
         .padding()
-        .navigationTitle("Confirm")
+        .navigationTitle("Set Time Limit")
     }
 }
 
