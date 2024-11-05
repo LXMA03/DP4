@@ -13,9 +13,16 @@ struct Challenge: Identifiable {
 
 // Sample data for testing
 let screenTimeChallenges = [
-    Challenge(title: "Stay Under 2 Hours", description: "Limit screen time to 3 hours today", reward: "Unlock New Avatar", points: 50, status: "In Progress"),
-    Challenge(title: "Social Media Detox", description: "No social media usage for 12 hours", reward: "Earn 100 Points", points: 100, status: "Pending"),
-    Challenge(tile: "Weekend Challenge", description: "Stay under 12 hours over the course of the entire weekend", reward: "Bonus Level Access", points: 150, status: "Completed")
+    Challenge(
+        title: "Stay Under 2 Hours", description: "Limit screen time to 3 hours today",
+        reward: "Unlock New Avatar", points: 50, status: "In Progress"),
+    Challenge(
+        title: "Social Media Detox", description: "No social media usage for 12 hours",
+        reward: "Earn 100 Points", points: 100, status: "Pending"),
+    Challenge(
+        title: "Weekend Challenge",
+        description: "Stay under 12 hours over the course of the entire weekend",
+        reward: "Bonus Level Access", points: 150, status: "Completed"),
 ]
 
 struct ChallengesView: View {
@@ -37,13 +44,14 @@ struct ChallengesView: View {
                 List(challenges) { challenge in
                     HStack {
                         VStack(alignment: .leading) {
-                            .font(.headline)
-                        Text(challenge.description)
-                            .font(.subheadline)
-                            .foregroundColor(.grey)
-                        Text("Reward: \(challenge.reward)")
-                            .font(.footnote)
-                            .foregroundColor(.blue)
+                            Text("Challenge Title")
+                                .font(.headline)
+                            Text(challenge.description)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                            Text("Reward: \(challenge.reward)")
+                                .font(.footnote)
+                                .foregroundColor(.blue)
                         }
                         Spacer()
                         VStack {
@@ -64,11 +72,14 @@ struct ChallengesView: View {
                 }
                 .navigationTitle("Screen Time Challenges")
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: addChallenge) {
-                            Image(systemName: "plus")
+                    #if os(iOS)
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: addChallenge) {
+                                Image(systemName: "plus")
+                            }
                         }
-                    }
+                    #endif
+
                 }
             }
         }
@@ -93,7 +104,9 @@ struct ChallengesView: View {
 
     // Function to add a new challenge
     private func addChallenge() {
-        let newChallenge = Challenge(title: "New Challenge", description: "Reduce screen time by 30 minutes", reward: "Earn 20 Points", points: 20, status: "Pending")
+        let newChallenge = Challenge(
+            title: "New Challenge", description: "Reduce screen time by 30 minutes",
+            reward: "Earn 20 Points", points: 20, status: "Pending")
         challenges.append(newChallenge)
     }
 
