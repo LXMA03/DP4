@@ -5,5 +5,4 @@ Our app is designed to have users engage and compete with friends/ family in edu
 Our goal is to help users spend less time on social media apps and more time on educational apps by incorporating a reward system.
 
 Built with:
-  Visual Studio Code
-  Swift Playground
+  Visual Studio Code, Swift Playground, and XCode
