@@ -2,7 +2,7 @@ EduTrack.swift
 
 We noticed many teens spend hours on their smartphones, primarily for entertainment.
 
-Tha is why we developed an application to encourage healthier phone habits.
+That is why we developed an application to encourage healthier phone habits.
 
 Our app motivates users to engage more with educational apps by competing in fun challenges with friends and family, earning points, and unlocking rewards. 
 
