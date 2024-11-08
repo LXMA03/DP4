@@ -1,8 +1,11 @@
 EduTrack.swift
 
-We noticed many young teens spend hours on their smartphones, so we developed an application to help combat the issue.
-Our app is designed to have users engage and compete with friends/ family in educational challenges to earn points and collect rewards. 
-Our goal is to help users spend less time on social media apps and more time on educational apps by incorporating a reward system.
+We noticed many teens spend hours on their smartphones martphones, primarily for entertainment.
 
-Built with:
-  Visual Studio Code, Swift Playground, and XCode
+Tha is why we developed an application to encourage healthier phone habits.
+
+Our app motivates users to engage more with educational apps by competing in fun challenges with friends and family, earning points, and unlocking rewards. 
+
+Our goal is to help users reduce time spent on social media and entertainment apps and increase their focus on educational content through gamified phone usage and a real-life rewards system.
+
+Built with: Visual Studio Code, Swift Playground, and XCode
