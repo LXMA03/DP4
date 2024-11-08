@@ -1,6 +1,6 @@
 EduTrack.swift
 
-We noticed many teens spend hours on their smartphones martphones, primarily for entertainment.
+We noticed many teens spend hours on their smartphones, primarily for entertainment.
 
 Tha is why we developed an application to encourage healthier phone habits.
 
