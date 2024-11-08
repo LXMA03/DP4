@@ -22,3 +22,9 @@ struct RewardsView: View {
         
     }
 }
+
+struct RewardsView_Preview: PreviewProvider {
+    static var previews: some View {
+        RewardsView()
+    }
+}

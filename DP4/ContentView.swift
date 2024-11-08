@@ -71,7 +71,7 @@ struct ContentView: View {
 }
 
 // Sample Views for the Tab Items
-struct HomeView: View {
+struct Home_View: View {
     var body: some View {
         NavigationView {
             VStack {
@@ -85,7 +85,7 @@ struct HomeView: View {
     }
 }
 
-struct RewardsView: View {
+struct Rewards_View: View {
     var body: some View {
         NavigationView {
             VStack {
@@ -99,7 +99,7 @@ struct RewardsView: View {
     }
 }
 
-struct CompetitionView: View {
+struct Competition_View: View {
     var body: some View {
         NavigationView {
             VStack {
@@ -113,7 +113,7 @@ struct CompetitionView: View {
     }
 }
 
-struct FriendsView: View {
+struct Friends_View: View {
     var body: some View {
         NavigationView {
             VStack {
@@ -127,7 +127,7 @@ struct FriendsView: View {
     }
 }
 
-struct ProfileView: View {
+struct Profile_View: View {
     var body: some View {
         NavigationView {
             VStack {

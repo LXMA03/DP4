@@ -87,7 +87,7 @@ struct CompetitionView: View {
                     }
                 }
             }
-            .navigationTitle("Competitions")
+            .navigationTitle("Competition Page")
             .padding(.vertical)
         }
     }

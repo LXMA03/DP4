@@ -6,11 +6,69 @@
 //
 import SwiftUI
 
+struct Friend: Identifiable {
+    let id = UUID()
+    let name: String
+    var isSelected: Bool
+}
+
 struct FriendsView: View {
+    @State private var friends = [
+        // List of friends
+        Friend(name: "Jane", isSelected: false),
+        Friend(name: "Cynthia", isSelected: false),
+        Friend(name: "Lydia", isSelected: false),
+        Friend(name: "Muhammad", isSelected: false)
+    ]
+    
+    // Will show ChallengesView
+    @State private var showChallengesView = false
+    
+    // Navigation
     var body: some View {
-        Text("Friends Screen")
-            .font(.largeTitle)
-            .padding()
+        NavigationView {
+            VStack {
+                Text("Select Friends to Start Challenge")
+                    .font(.largeTitle)
+                    .padding()
+                
+                List($friends) { $friend in
+                    HStack {
+                        Text(friend.name)
+                        Spacer()
+                        Image(systemName: friend.isSelected ? "checkmark.circle.fill" : "circle")
+                            .foregroundColor(friend.isSelected ? .green : .gray)
+                            .onTapGesture {friend.isSelected.toggle()}
+                    }
+                }
+                
+                Button(action: {
+                    if friends.contains(where: { $0.isSelected}) {
+                        // Show challenge page if at least 1 friend selected
+                        showChallengesView = true
+                    }
+                    else {
+                        // Ask if user is sure they don't want to play with friends
+                    }
+                    
+                }) {
+                    Text("Go to Challenges")
+                        .padding()
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+                .padding()
+                .sheet(isPresented: $showChallengesView) {
+                    ChallengesView()
+                }
+            }
+            .navigationTitle("Friends")
+        }
     }
 }
 
+struct FriendsView_Previews: PreviewProvider {
+    static var previews: some View {
+        FriendsView()
+    }
+}
