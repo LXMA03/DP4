@@ -26,17 +26,24 @@ struct HomeView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
             }
-            
-            .navigationTitle("Settings")
+
             
             .toolbar {
                 // Settings button to navigate to settings
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SettingView()) {
-                        // Icon for settings
-                        Image(systemName: "gearshape")
-                            .imageScale(.large)
-                            .font(.system(size: 24))
+                        VStack(spacing: 2) {
+                            // Icon for settings
+                            Image(systemName: "gearshape")
+                                .imageScale(.large)
+                                .font(.system(size: 24))
+                                .foregroundColor(.black)
+                            // Letter for settings
+                            Text("Settings")
+                                .font(.system(size: 14))
+                                .foregroundColor(.black)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     }
                 }
             }

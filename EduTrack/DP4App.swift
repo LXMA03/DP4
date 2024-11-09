@@ -11,7 +11,10 @@ import SwiftUI
 struct DP4App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView() // main view, starts the app
+            ContentView()
+                .background(Color.white) // Sets a global white background
+                .foregroundColor(.black) // Sets a global black text color
+                .environment(\.colorScheme, .light)// main view, starts the app
         }
     }
 }
