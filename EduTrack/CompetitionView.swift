@@ -31,12 +31,11 @@ struct CompetitionView: View {
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(spacing: 20) {
                 // Header section
                 Text("Competitions")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.horizontal)
+                    .font(.system(size: 36, weight: .semibold, design: .default))
+                    .padding(.top, 30)
 
                 // Leaderboard button
                 HStack {
@@ -87,7 +86,6 @@ struct CompetitionView: View {
                     }
                 }
             }
-            .navigationTitle("Competition Page")
             .padding(.vertical)
         }
     }

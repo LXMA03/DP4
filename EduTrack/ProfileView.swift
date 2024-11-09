@@ -8,9 +8,11 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text("Profile Screen")
-            .font(.largeTitle)
-            .padding()
+        VStack(spacing: 20) {
+            Text("Profile")
+                .font(.system(size: 36, weight: .semibold, design: .default))
+                .padding(.top, 15)
+        }
     }
 }
 

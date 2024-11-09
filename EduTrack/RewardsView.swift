@@ -8,10 +8,10 @@ import SwiftUI
 
 struct RewardsView: View {
     var body: some View {
-        VStack {
-            Text("Redeem Rewards")
-                .font(.largeTitle)
-                .padding()
+        VStack(spacing: 20) {
+            Text("Rewards")
+                .font(.system(size: 36, weight: .semibold, design: .default))
+                .padding(.top, 15)
             
             List {
                 Text("Plushie - 1000 pts")

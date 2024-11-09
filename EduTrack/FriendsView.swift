@@ -28,10 +28,11 @@ struct FriendsView: View {
     // Navigation
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Select Friends to Start Challenge")
-                    .font(.largeTitle)
-                    .padding()
+            VStack(spacing: 20) {
+             
+                Text("Friends")
+                    .font(.system(size: 36, weight: .semibold, design: .default))
+                    .padding(.top, 30)
                 
                 List($friends) { $friend in
                     HStack {
@@ -75,7 +76,6 @@ struct FriendsView: View {
                     ChallengesView()
                 }
             }
-            .navigationTitle("Friends")
         }
     }
 }
