@@ -32,8 +32,8 @@ struct PieChartView: View {
 
 struct HomeView: View {
     let pieData = [
-        PieSegment(color: .green, value: 60, label: "Educational Activity"),
-        PieSegment(color: .red, value: 40, label: "Entertainment Activity")
+        PieSegment(color: .blue, value: 60, label: "Educational Activity"),
+        PieSegment(color: Color.gray.opacity(0.6), value: 40, label: "Entertainment Activity")
     ]
     
     var body: some View {
@@ -43,7 +43,7 @@ struct HomeView: View {
                 // Main Title
                 Text("Today’s Activity")
                     .font(.system(size: 36, weight: .semibold, design: .default))
-                    .padding(.top, 15)
+                    .padding(.top, 30)
                 
                 // Pie Chart
                 PieChartView(pieData: pieData)
@@ -53,7 +53,7 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Circle()
-                                .fill(Color.green)
+                                .fill(Color.blue)
                                 .frame(width: 15, height: 15)
                             Text("Educational Activity: 7.2 hrs")
                                 .font(.subheadline)
@@ -61,7 +61,7 @@ struct HomeView: View {
                         
                         HStack {
                             Circle()
-                                .fill(Color.red)
+                                .fill(Color.gray.opacity(0.6))
                                 .frame(width: 15, height: 15)
                             Text("Entertainment Activity: 4.8 hrs")
                                 .font(.subheadline)
@@ -107,11 +107,11 @@ struct HomeView: View {
                                 .imageScale(.large)
                                 .font(.system(size: 24))
                                 .foregroundColor(.black)
-                                .padding(.top, 10)
+                                .padding(.top, 20)
                             Text("Settings")
                                 .font(.system(size: 14))
                                 .foregroundColor(.black)
-                                .padding(.bottom, 5)
+                                .padding(.bottom, 20)
                         }
                     }
                 }

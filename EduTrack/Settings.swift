@@ -11,17 +11,36 @@ struct SettingView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("Settings")
-                .font(.largeTitle)
-                .bold()
-                .padding(.top, 40)
+                .font(.system(size: 36, weight: .semibold, design: .default))
+                .padding(.top, 15)
             
             // Option to set time limit
             NavigationLink(destination: Option1View()) {
-                Text("Set entertainment time limit")
+                Text("Set Entertainment Apps Time Limit")
                     .font(.title2)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue.opacity(0.7))
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            
+            NavigationLink(destination: Option2View()) {
+                Text("Contact Help Center")
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            
+            NavigationLink(destination: Option3View()) {
+                Text("Set Sound Preferences")
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
@@ -35,7 +54,9 @@ struct Option1View: View {
     // Variables
     @State private var selectedHour = 0
     @State private var selectedMin = 0
-    @State private var selectedSec = 0
+    @State private var showConfirmation = false
+    @State private var showConfirmationHelpCenter = false
+    @State private var showConfirmationAudio = false
     
     // Arrays to hold the time selector
     let hours = Array(0...23)
@@ -45,9 +66,9 @@ struct Option1View: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("Set Time Limit on Entertainment Apps")
-                .font(.largeTitle)
-                .bold()
-                .padding(.top, 40)
+                .font(.system(size: 36, weight: .semibold, design: .default))
+                .multilineTextAlignment(.center)
+                .padding(.top, 15)
             
             // Create pickers for hours, min, and sec
             HStack {
@@ -67,20 +88,14 @@ struct Option1View: View {
                 .pickerStyle(WheelPickerStyle())
                 .frame(maxWidth: 100)
                 
-                // Second selector
-                Picker(selection: $selectedSec, label: Text("Seconds")) {
-                    ForEach(seconds, id: \.self) { second in Text("\(second)  sec").tag(second)
-                    }
-                }
-                .pickerStyle(WheelPickerStyle())
-                .frame(maxWidth: 100)
             }
             .padding()
             
             // Button to confirm the time selected
             Button(action: {
                 // Action for setting screen time
-                print("Screen time selected for \(selectedHour) hours, \(selectedMin) minutes, \(selectedSec) seconds")
+                showConfirmation = true
+                
             }) {
                 Text("Confirm")
                     .font(.title2)
@@ -91,13 +106,119 @@ struct Option1View: View {
                     .cornerRadius(10)
             }
             .padding(.horizontal)
+            .alert(isPresented: $showConfirmation) {
+                            Alert(
+                                title: Text("Time Limit Set"),
+                                message: Text("Screen time set for \(selectedHour) hours and \(selectedMin) minutes"),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
             
             Spacer()
         }
         .padding()
-        .navigationTitle("Set Time Limit")
     }
 }
+
+struct Option2View: View {
+    @State private var message = ""
+    @State private var alertMessage = ""
+    @State private var showConfirmationHelpCenter = false
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text ("Contact Help Center")
+                .font(.system(size: 36, weight: .semibold, design: .default))
+                .multilineTextAlignment(.center)
+                .padding(.top, 15)
+            
+            TextField("Enter your message here: ", text: $message)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .frame(maxWidth: .infinity)
+            
+            Button(action: {
+                // Action for setting screen time
+                if message.isEmpty {
+                    alertMessage = "No message has been sent"
+                }
+                else {
+                    alertMessage = "Your message has been sent"
+                }
+                showConfirmationHelpCenter = true
+            }) {
+                Text("Confirm")
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            .alert(isPresented: $showConfirmationHelpCenter) {
+                            Alert(
+                                title: Text("Message Status"),
+                                message: Text(alertMessage),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
+            
+            Spacer()
+        }
+        .padding()
+    }
+}
+
+struct Option3View: View {
+    @State private var volume: Double = 50
+    @State private var showConfirmationAudio = false
+    
+    var body: some View {
+        VStack(spacing: 20){
+            Text ("Set Sound Preferences")
+                .font(.system(size: 36, weight: .semibold, design: .default))
+                .multilineTextAlignment(.center)
+                .padding(.top, 15)
+            
+            VStack {
+                Text("Volume: \(Int(volume))%")
+                    .font(.title2)
+                
+                Slider(value: $volume, in: 0...100, step: 1)
+                    .padding()
+            }
+            .padding(.horizontal)
+            
+            Spacer()
+            
+            Button(action: {
+                // Action for setting screen time
+                showConfirmationAudio = true
+            }) {
+                Text("Confirm")
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            .alert(isPresented: $showConfirmationAudio) {
+                            Alert(
+                                title: Text("Volume Set"),
+                                message: Text("Volume set to \(Int(volume))%"),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
+            
+            Spacer()
+        }
+        .padding()
+    }
+}
+
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
