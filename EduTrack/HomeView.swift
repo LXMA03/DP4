@@ -50,14 +50,13 @@ struct HomeView: View {
                 
                 // Legend
                 HStack {
-                    VStack(alignment: .leading, spacing: 12) { 
+                    VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Circle()
                                 .fill(Color.green)
                                 .frame(width: 15, height: 15)
                             Text("Educational Activity: 7.2 hrs")
                                 .font(.subheadline)
-                            
                         }
                         
                         HStack {
@@ -83,18 +82,20 @@ struct HomeView: View {
             }
             
             .toolbar {
-                // Points
+                // Points 
                 ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {
-                        Image(systemName: "dollarsign.circle")
-                            .imageScale(.large)
-                            .font(.system(size: 24))
-                            .foregroundColor(.black)
-                            .padding(.top, 5)
-                        
-                        Text("07000")
-                            .font(.custom("DS-Digital", size: 24))
-                            .foregroundColor(.black)
+                    NavigationLink(destination: RewardsView()) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                                .imageScale(.large)
+                                .font(.system(size: 24))
+                                .foregroundColor(.black)
+                                .padding(.top, 5)
+                            
+                            Text("07000")
+                                .font(.custom("DS-Digital", size: 24))
+                                .foregroundColor(.black)
+                        }
                     }
                 }
                 
