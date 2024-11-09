@@ -23,6 +23,7 @@ struct FriendsView: View {
     
     // ChallengesView
     @State private var showChallengesView = false
+    @State private var showIndividualChallengeView = false
     @State private var showAlert = false
     
     var body: some View {
@@ -120,13 +121,16 @@ struct FriendsView: View {
                         title: Text("No Friend Selected"),
                         message: Text("Are you sure you want to proceed?"),
                         primaryButton: .default(Text("Confirm"), action: {
-                            showChallengesView = true
+                            showIndividualChallengeView = true
                         }),
                     secondaryButton: .cancel(Text("No"))
                     )
                 }
                 .sheet(isPresented: $showChallengesView) {
                     ChallengesView()
+                }
+                .sheet(isPresented: $showIndividualChallengeView) {
+                    IndividualChallengeView()
                 }
             }
         }

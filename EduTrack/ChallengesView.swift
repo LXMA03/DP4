@@ -11,7 +11,6 @@ struct Challenge: Identifiable {
     var status: String
 }
 
-// Sample data for testing
 let screenTimeChallenges = [
     Challenge(
         title: "Stay Under 2 Hours", description: "Limit screen time to 3 hours today",
