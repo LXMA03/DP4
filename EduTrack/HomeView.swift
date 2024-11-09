@@ -107,11 +107,11 @@ struct HomeView: View {
                                 .imageScale(.large)
                                 .font(.system(size: 24))
                                 .foregroundColor(.black)
-                                .padding(.top, 20)
+                                .padding(.top, 25)
                             Text("Settings")
                                 .font(.system(size: 14))
                                 .foregroundColor(.black)
-                                .padding(.bottom, 20)
+                                .padding(.bottom, 5)
                         }
                     }
                 }
