@@ -24,13 +24,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18947EA42CC77CA600B8CCED /* DP4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DP4.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		18947EB42CC77CA800B8CCED /* DP4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DP4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		18947EBE2CC77CA800B8CCED /* DP4UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DP4UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18947EA42CC77CA600B8CCED /* EduTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18947EB42CC77CA800B8CCED /* EduTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18947EBE2CC77CA800B8CCED /* EduTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		18947EA62CC77CA600B8CCED /* DP4 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4; sourceTree = "<group>"; };
+		18947EA62CC77CA600B8CCED /* EduTrack */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = EduTrack; path = /Users/wendybae/Documents/EduTrack/EduTrack; sourceTree = "<absolute>"; };
 		18947EB72CC77CA800B8CCED /* DP4Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4Tests; sourceTree = "<group>"; };
 		18947EC12CC77CA800B8CCED /* DP4UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4UITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -63,7 +63,7 @@
 		18947E9B2CC77CA600B8CCED = {
 			isa = PBXGroup;
 			children = (
-				18947EA62CC77CA600B8CCED /* DP4 */,
+				18947EA62CC77CA600B8CCED /* EduTrack */,
 				18947EB72CC77CA800B8CCED /* DP4Tests */,
 				18947EC12CC77CA800B8CCED /* DP4UITests */,
 				18947EA52CC77CA600B8CCED /* Products */,
@@ -73,9 +73,9 @@
 		18947EA52CC77CA600B8CCED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18947EA42CC77CA600B8CCED /* DP4.app */,
-				18947EB42CC77CA800B8CCED /* DP4Tests.xctest */,
-				18947EBE2CC77CA800B8CCED /* DP4UITests.xctest */,
+				18947EA42CC77CA600B8CCED /* EduTrack.app */,
+				18947EB42CC77CA800B8CCED /* EduTrackTests.xctest */,
+				18947EBE2CC77CA800B8CCED /* EduTrackUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,9 +83,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18947EA32CC77CA600B8CCED /* DP4 */ = {
+		18947EA32CC77CA600B8CCED /* EduTrack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18947EC82CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "DP4" */;
+			buildConfigurationList = 18947EC82CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "EduTrack" */;
 			buildPhases = (
 				18947EA02CC77CA600B8CCED /* Sources */,
 				18947EA12CC77CA600B8CCED /* Frameworks */,
@@ -96,18 +96,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				18947EA62CC77CA600B8CCED /* DP4 */,
+				18947EA62CC77CA600B8CCED /* EduTrack */,
 			);
-			name = DP4;
+			name = EduTrack;
 			packageProductDependencies = (
 			);
 			productName = DP4;
-			productReference = 18947EA42CC77CA600B8CCED /* DP4.app */;
+			productReference = 18947EA42CC77CA600B8CCED /* EduTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
-		18947EB32CC77CA800B8CCED /* DP4Tests */ = {
+		18947EB32CC77CA800B8CCED /* EduTrackTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18947ECB2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "DP4Tests" */;
+			buildConfigurationList = 18947ECB2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "EduTrackTests" */;
 			buildPhases = (
 				18947EB02CC77CA800B8CCED /* Sources */,
 				18947EB12CC77CA800B8CCED /* Frameworks */,
@@ -121,16 +121,16 @@
 			fileSystemSynchronizedGroups = (
 				18947EB72CC77CA800B8CCED /* DP4Tests */,
 			);
-			name = DP4Tests;
+			name = EduTrackTests;
 			packageProductDependencies = (
 			);
 			productName = DP4Tests;
-			productReference = 18947EB42CC77CA800B8CCED /* DP4Tests.xctest */;
+			productReference = 18947EB42CC77CA800B8CCED /* EduTrackTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		18947EBD2CC77CA800B8CCED /* DP4UITests */ = {
+		18947EBD2CC77CA800B8CCED /* EduTrackUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18947ECE2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "DP4UITests" */;
+			buildConfigurationList = 18947ECE2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "EduTrackUITests" */;
 			buildPhases = (
 				18947EBA2CC77CA800B8CCED /* Sources */,
 				18947EBB2CC77CA800B8CCED /* Frameworks */,
@@ -144,11 +144,11 @@
 			fileSystemSynchronizedGroups = (
 				18947EC12CC77CA800B8CCED /* DP4UITests */,
 			);
-			name = DP4UITests;
+			name = EduTrackUITests;
 			packageProductDependencies = (
 			);
 			productName = DP4UITests;
-			productReference = 18947EBE2CC77CA800B8CCED /* DP4UITests.xctest */;
+			productReference = 18947EBE2CC77CA800B8CCED /* EduTrackUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -174,7 +174,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18947E9F2CC77CA600B8CCED /* Build configuration list for PBXProject "DP4" */;
+			buildConfigurationList = 18947E9F2CC77CA600B8CCED /* Build configuration list for PBXProject "EduTrack" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -188,9 +188,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18947EA32CC77CA600B8CCED /* DP4 */,
-				18947EB32CC77CA800B8CCED /* DP4Tests */,
-				18947EBD2CC77CA800B8CCED /* DP4UITests */,
+				18947EA32CC77CA600B8CCED /* EduTrack */,
+				18947EB32CC77CA800B8CCED /* EduTrackTests */,
+				18947EBD2CC77CA800B8CCED /* EduTrackUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -246,12 +246,12 @@
 /* Begin PBXTargetDependency section */
 		18947EB62CC77CA800B8CCED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18947EA32CC77CA600B8CCED /* DP4 */;
+			target = 18947EA32CC77CA600B8CCED /* EduTrack */;
 			targetProxy = 18947EB52CC77CA800B8CCED /* PBXContainerItemProxy */;
 		};
 		18947EC02CC77CA800B8CCED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18947EA32CC77CA600B8CCED /* DP4 */;
+			target = 18947EA32CC77CA600B8CCED /* EduTrack */;
 			targetProxy = 18947EBF2CC77CA800B8CCED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -384,6 +384,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DP4/Preview Content\"";
+				DEVELOPMENT_TEAM = G5QX445MRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -391,6 +392,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -412,6 +414,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DP4/Preview Content\"";
+				DEVELOPMENT_TEAM = G5QX445MRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -419,6 +422,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,7 +450,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DP4.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DP4";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EduTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EduTrack";
 			};
 			name = Debug;
 		};
@@ -464,7 +468,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DP4.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DP4";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EduTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EduTrack";
 			};
 			name = Release;
 		};
@@ -503,7 +507,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18947E9F2CC77CA600B8CCED /* Build configuration list for PBXProject "DP4" */ = {
+		18947E9F2CC77CA600B8CCED /* Build configuration list for PBXProject "EduTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18947EC62CC77CA800B8CCED /* Debug */,
@@ -512,7 +516,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18947EC82CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "DP4" */ = {
+		18947EC82CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "EduTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18947EC92CC77CA800B8CCED /* Debug */,
@@ -521,7 +525,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18947ECB2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "DP4Tests" */ = {
+		18947ECB2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "EduTrackTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18947ECC2CC77CA800B8CCED /* Debug */,
@@ -530,7 +534,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18947ECE2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "DP4UITests" */ = {
+		18947ECE2CC77CA800B8CCED /* Build configuration list for PBXNativeTarget "EduTrackUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18947ECF2CC77CA800B8CCED /* Debug */,
