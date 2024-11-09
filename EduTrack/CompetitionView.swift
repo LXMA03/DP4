@@ -3,30 +3,27 @@
 //  DP4
 //
 //  Created by Cynthia Rosales on 10/22/24. Worked further on by Muhammad Khan on 11/04/2024
+//
 
 import SwiftUI
 
-// Define a model for each competition
 struct Competition: Identifiable {
     let id = UUID()
     let name: String
     var participants: Int
-    var prize: String
-    var progress: Double  // Progress as a percentage
+    var progress: Double
 }
 
-// Sample data for competitions
 let sampleCompetitions = [
     Competition(
-        name: "Daily Screen Time Challenge", participants: 25, prize: "Exclusive Avatar",
+        name: "Competitive Challenge: Challenge with Lydia", participants: 2,
         progress: 0.6),
-    Competition(name: "Weekend Detox", participants: 18, prize: "Bonus Points", progress: 0.4),
     Competition(
-        name: "Social Media Free Week", participants: 32, prize: "Gift Card", progress: 0.8),
+        name: "Individual Challenge: Challenge 1", participants: 1,
+        progress: 0.4)
 ]
 
 struct CompetitionView: View {
-    // State variables to hold competition data and total competitions
     @State private var competitions = sampleCompetitions
 
     var body: some View {
@@ -75,7 +72,33 @@ struct CompetitionView: View {
                         }
                     }
 
-                // Leaderboard button
+                // List of competitions
+                ScrollView {
+                    ForEach(competitions) { competition in
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Text(competition.name)
+                                    .font(.headline)
+                                Spacer()
+                                Text("\(competition.participants) Participants")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                            // Progress bar
+                            ProgressView(value: competition.progress)
+                                .progressViewStyle(LinearProgressViewStyle(tint: .blue))
+                                .frame(height: 8)
+                                .cornerRadius(4)
+                        }
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                        .padding(.horizontal)
+                    }
+                }
+                
+                // View Leaderboard
                 HStack {
                     Spacer()
                     Button(action: {
@@ -91,38 +114,7 @@ struct CompetitionView: View {
                     Spacer()
                 }
                 .padding(.horizontal)
-
-                // Divider for separation
-                Divider()
-
-                // List of competitions
-                ScrollView {
-                    ForEach(competitions) { competition in
-                        VStack(alignment: .leading, spacing: 8) {
-                            HStack {
-                                Text(competition.name)
-                                    .font(.headline)
-                                Spacer()
-                                Text("\(competition.participants) Participants")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                            }
-                            Text("Prize: \(competition.prize)")
-                                .font(.subheadline)
-                                .foregroundColor(.green)
-                            // Progress bar
-                            ProgressView(value: competition.progress)
-                                .progressViewStyle(LinearProgressViewStyle(tint: .blue))
-                                .frame(height: 8)
-                                .cornerRadius(4)
-                        }
-                        .padding()
-                        .background(Color.secondary)
-                        .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                        .padding(.horizontal)
-                    }
-                }
+                .padding(.bottom, 20)
             }
             .padding(.vertical)
         }
