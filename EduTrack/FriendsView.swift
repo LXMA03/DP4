@@ -24,7 +24,7 @@ struct FriendsView: View {
     @State private var challenges = [
             Challenge(title: "Challenge with Lydia", description: "Limit screen time to 3 hours per day", duration: "Weekly", points: 50, status: "In Progress"),
             Challenge(title: "Challenge with Muhammad", description: "No social media usage for 12 hours", duration: "Daily", points: 100, status: "Pending"),
-            Challenge(title: "Challenge with Jane", description: "Limit social media apps under 12 hours per week", duration: "Monthly", points: 150, status: "In Progress"),
+            Challenge(title: "Challenge with Jane", description: "Limit social media apps under 12 hours per week", duration: "Monthly", points: 150, status: "Pending"),
     ]
     
     // ChallengesView

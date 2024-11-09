@@ -28,7 +28,7 @@ let CompetitiveChallenges = [
     Challenge(
         title: "Challenge with Jane",
         description: "Limit social media apps under 12 hours per week",
-        duration: "Monthly", points: 150, status: "In Progress"),
+        duration: "Monthly", points: 150, status: "Pending"),
 ]
 
 struct ChallengeSelectionView: View {
@@ -107,7 +107,9 @@ struct ChallengesView: View {
     @Binding var challenges: [Challenge]
     @State private var totalPoints = 7000
     @State private var showChallengeSelection = false
-    var selectedFriendName: String 
+    var selectedFriendName: String
+    @State private var showDeleteConfirmation = false
+    @State private var challengeToDelete: Challenge?
 
     var body: some View {
         NavigationView {
@@ -127,41 +129,51 @@ struct ChallengesView: View {
                 }
                 .padding()
 
-                List(challenges) { challenge in
-                    VStack(spacing: 8) {
-                        HStack(alignment: .top) {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(challenge.title)
-                                    .font(.system(size: 24, weight: .bold))
-                                Text(challenge.description)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                                Text("Duration: \(challenge.duration)")
-                                    .font(.footnote)
-                                    .foregroundColor(.blue)
+                List {
+                    ForEach(challenges) { challenge in
+                        VStack(spacing: 8) {
+                            HStack(alignment: .top) {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(challenge.title)
+                                        .font(.system(size: 24, weight: .bold))
+                                    Text(challenge.description)
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                    Text("Duration: \(challenge.duration)")
+                                        .font(.footnote)
+                                        .foregroundColor(.blue)
+                                }
+                                Spacer()
+                                VStack(alignment: .center) {
+                                    Text("\(challenge.points) pts")
+                                        .font(.caption)
+                                        .padding(6)
+                                        .background(Color.yellow)
+                                        .cornerRadius(8)
+                                    Text(challenge.status)
+                                        .font(.caption2)
+                                        .padding(6)
+                                        .background(statusColor(status: challenge.status))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
                             }
-                            Spacer()
-                            VStack(alignment: .center) {
-                                Text("\(challenge.points) pts")
-                                    .font(.caption)
-                                    .padding(6)
-                                    .background(Color.yellow)
-                                    .cornerRadius(8)
-                                Text(challenge.status)
-                                    .font(.caption2)
-                                    .padding(6)
-                                    .background(statusColor(status: challenge.status))
-                                    .foregroundColor(.white)
-                                    .cornerRadius(8)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 2)
+                        }
+                        .padding(.vertical, 8)
+                        .listRowBackground(Color.clear)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                showDeleteConfirmation = true
+                                challengeToDelete = challenge
+                            } label: {
+                                Text("Delete")
                             }
                         }
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 2)
                     }
-                    .padding(.vertical, 8)
-                    .listRowBackground(Color.clear)
                 }
                 .scrollContentBackground(.hidden)
                 .background(Color.white)
@@ -179,6 +191,19 @@ struct ChallengesView: View {
                     ChallengeSelectionView(selectedFriend: selectedFriendName) { selectedChallenge in
                         addSelectedChallenge(selectedChallenge)
                     }
+                }
+                .alert(isPresented: $showDeleteConfirmation) {
+                    Alert(
+                        title: Text("Stopping Challenge"),
+                        message: Text("Are you sure you want to proceed?"),
+                        primaryButton: .destructive(Text("Confirm"), action: {
+                            if let challengeToDelete = challengeToDelete,
+                               let index = challenges.firstIndex(where: { $0.id == challengeToDelete.id }) {
+                                challenges.remove(at: index)
+                            }
+                        }),
+                        secondaryButton: .cancel(Text("No"))
+                    )
                 }
             }
         }
@@ -215,5 +240,3 @@ struct ChallengesView: View {
         totalPoints = 7000 + challenges.filter { $0.status == "Completed" }.reduce(0) { $0 + $1.points }
     }
 }
-
-
