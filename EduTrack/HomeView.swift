@@ -17,15 +17,30 @@ struct PieSegment: Identifiable {
 
 struct PieChartView: View {
     let pieData: [PieSegment]
-
+    
     var body: some View {
-        Chart(pieData) { segment in
-            SectorMark(
-                angle: .value("Value", segment.value)
-            )
-            .foregroundStyle(segment.color)
+        ZStack {
+            Chart(pieData) { segment in
+                SectorMark(
+                    angle: .value("Value", segment.value)
+                )
+                .foregroundStyle(segment.color)
+            }
+            .frame(width: 300, height: 300)
+            
+            // Percentage Labels
+            VStack {
+                Text("60%")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.white)
+                    .offset(x: 70, y: 10)
+                
+                Text("40%")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.white)
+                    .offset(x: -70, y: -10)
+            }
         }
-        .frame(width: 300, height: 300)
         .padding()
     }
 }
