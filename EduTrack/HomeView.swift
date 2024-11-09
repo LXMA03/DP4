@@ -38,23 +38,50 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {  // Increased spacing between items
+            VStack(spacing: 20) {
                 
                 // Main Title
                 Text("Today’s Activity")
-                    .font(.system(size: 36, weight: .bold, design: .default))
-                    .padding(.top, 10)
+                    .font(.system(size: 36, weight: .semibold, design: .default))
+                    .padding(.top, 15)
                 
                 // Pie Chart
                 PieChartView(pieData: pieData)
                 
-                Text("Points Rule: 10 points every hour on Educational Activity")
-                    .font(.subheadline)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
+                // Legend
+                HStack {
+                    VStack(alignment: .leading, spacing: 12) { 
+                        HStack {
+                            Circle()
+                                .fill(Color.green)
+                                .frame(width: 15, height: 15)
+                            Text("Educational Activity: 7.2 hrs")
+                                .font(.subheadline)
+                            
+                        }
+                        
+                        HStack {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 15, height: 15)
+                            Text("Entertainment Activity: 4.8 hrs")
+                                .font(.subheadline)
+                        }
+                    }
+                    Spacer()
+                }
+                .padding(.leading, 30)
                 
+                // Points Rule
+                Text("Earn 10 points every hour on Educational Activity")
+                    .font(.system(size: 20, weight: .semibold))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 40)
+                    .padding(.horizontal, 20)
+
                 Spacer()
             }
+            
             .toolbar {
                 // Points
                 ToolbarItem(placement: .navigationBarLeading) {
