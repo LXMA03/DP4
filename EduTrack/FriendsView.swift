@@ -21,11 +21,10 @@ struct FriendsView: View {
         Friend(name: "Muhammad", isSelected: false)
     ]
     
-    // Will show ChallengesView
+    // ChallengesView
     @State private var showChallengesView = false
     @State private var showAlert = false
     
-    // Navigation
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -34,6 +33,9 @@ struct FriendsView: View {
                 Text("Friends")
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 30)
+                Text("Compete with friends and try out new challenges!")
+                    .font(.system(size: 14, design: .default))
+                    .padding(.top, -10)
                 
                     .toolbar {
                         // Points
@@ -75,20 +77,33 @@ struct FriendsView: View {
                 List($friends) { $friend in
                     HStack {
                         Text(friend.name)
+                            .padding(.vertical, 10)
                         Spacer()
                         Image(systemName: friend.isSelected ? "checkmark.circle.fill" : "circle")
                             .foregroundColor(friend.isSelected ? .green : .gray)
-                            .onTapGesture {friend.isSelected.toggle()}
+                            .onTapGesture {
+                                if friend.isSelected {
+                                    friend.isSelected = false
+                                } else {
+                                    for index in friends.indices {
+                                        friends[index].isSelected = false
+                                    }
+                                    friend.isSelected = true
+                                }
+                            }
                     }
+                    .listRowBackground(Color.white)
                 }
+                .listStyle(InsetGroupedListStyle())
+                .scrollContentBackground(.hidden)
                 
                 Button(action: {
                     if friends.contains(where: { $0.isSelected}) {
-                        // Show challenge page if at least 1 friend selected
+                        // Show challenge page if 1 friend is selected
                         showChallengesView = true
                     }
                     else {
-                        // Ask if user is sure they don't want to play with friends
+                        // Ask user to confirm when no one is selected
                         showAlert = true
                     }
                     
@@ -102,12 +117,12 @@ struct FriendsView: View {
                 .padding()
                 .alert(isPresented: $showAlert) {
                     Alert(
-                        title: Text("No Friends Selected"),
-                        message: Text("Are you sure you want to proceed without selecting any friends?"),
-                        primaryButton: .default(Text("Yes"), action: {
-                            showChallengesView = true // "Yes" button proceeds to ChallengesView even if no friends are chosen
+                        title: Text("No Friend Selected"),
+                        message: Text("Are you sure you want to proceed?"),
+                        primaryButton: .default(Text("Confirm"), action: {
+                            showChallengesView = true
                         }),
-                        secondaryButton: .cancel(Text("No")) // "No" button cancels the action
+                    secondaryButton: .cancel(Text("No"))
                     )
                 }
                 .sheet(isPresented: $showChallengesView) {
