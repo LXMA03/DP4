@@ -82,9 +82,8 @@ struct HomeView: View {
             }
             
             .toolbar {
-                // Points 
+                // Points
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: RewardsView()) {
                         HStack {
                             Image(systemName: "dollarsign.circle")
                                 .imageScale(.large)
@@ -95,8 +94,10 @@ struct HomeView: View {
                             Text("07000")
                                 .font(.custom("DS-Digital", size: 24))
                                 .foregroundColor(.black)
+                            Text("pts")
+                                .font(.system(size: 18))
+                                .foregroundColor(.black)
                         }
-                    }
                 }
                 
                 // Settings
