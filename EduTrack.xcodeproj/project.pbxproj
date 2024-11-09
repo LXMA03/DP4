@@ -30,7 +30,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		18947EA62CC77CA600B8CCED /* EduTrack */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = EduTrack; path = /Users/wendybae/Documents/EduTrack/EduTrack; sourceTree = "<absolute>"; };
+		18947EA62CC77CA600B8CCED /* EduTrack */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = EduTrack; path = /Users/Jane/Documents/EduTrack/EduTrack; sourceTree = "<absolute>"; };
 		18947EB72CC77CA800B8CCED /* DP4Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4Tests; sourceTree = "<group>"; };
 		18947EC12CC77CA800B8CCED /* DP4UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4UITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -383,7 +383,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DP4/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"EduTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = G5QX445MRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -413,7 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DP4/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"EduTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = G5QX445MRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
