@@ -110,15 +110,23 @@ struct ChallengesView: View {
     var selectedFriendName: String
     @State private var showDeleteConfirmation = false
     @State private var challengeToDelete: Challenge?
+    @State private var showStatusMessage = false
+    @State private var statusMessage = ""
 
     var body: some View {
         NavigationView {
             VStack {
+                
+                // Main Title
                 Text("Competitive Challenge")
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 30)
-                
+                Text("Track In Progress challenges in Competition tab!")
+                    .font(.system(size: 14, design: .default))
+                    .padding(.top, -10)
+
                 HStack {
+                    Spacer()
                     Text("Current Points:")
                         .font(.system(size: 18))
                         .foregroundColor(.black)
@@ -131,8 +139,8 @@ struct ChallengesView: View {
 
                 List {
                     ForEach(challenges) { challenge in
-                        VStack(spacing: 8) {
-                            HStack(alignment: .top) {
+                        VStack {
+                            HStack {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(challenge.title)
                                         .font(.system(size: 24, weight: .bold))
@@ -150,12 +158,18 @@ struct ChallengesView: View {
                                         .padding(6)
                                         .background(Color.yellow)
                                         .cornerRadius(8)
-                                    Text(challenge.status)
-                                        .font(.caption2)
-                                        .padding(6)
-                                        .background(statusColor(status: challenge.status))
-                                        .foregroundColor(.white)
-                                        .cornerRadius(8)
+
+                                    Button(action: {
+                                        handleChallengeTap(challenge: challenge)
+                                    }) {
+                                        Text(challenge.status)
+                                            .font(.caption2)
+                                            .padding(6)
+                                            .background(statusColor(status: challenge.status))
+                                            .foregroundColor(.white)
+                                            .cornerRadius(8)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
                                 }
                             }
                             .padding()
@@ -177,7 +191,6 @@ struct ChallengesView: View {
                 }
                 .scrollContentBackground(.hidden)
                 .background(Color.white)
-
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
@@ -191,6 +204,9 @@ struct ChallengesView: View {
                     ChallengeSelectionView(selectedFriend: selectedFriendName) { selectedChallenge in
                         addSelectedChallenge(selectedChallenge)
                     }
+                }
+                .alert(isPresented: $showStatusMessage) {
+                    Alert(title: Text(statusMessage), dismissButton: .default(Text("OK")))
                 }
                 .alert(isPresented: $showDeleteConfirmation) {
                     Alert(
@@ -210,6 +226,15 @@ struct ChallengesView: View {
         .onAppear {
             calculateTotalPoints()
         }
+    }
+
+    private func handleChallengeTap(challenge: Challenge) {
+        if challenge.status == "In Progress" {
+            statusMessage = "Check on competition section to see your progress"
+        } else if challenge.status == "Pending" {
+            statusMessage = "Waiting for opponent's confirmation"
+        }
+        showStatusMessage = true
     }
 
     private func statusColor(status: String) -> Color {
