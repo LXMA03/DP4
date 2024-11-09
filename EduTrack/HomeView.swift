@@ -4,33 +4,59 @@
 //
 //  Created by Cynthia Rosales on 10/22/24.
 //
+
 import SwiftUI
+import Charts
+
+struct PieSegment: Identifiable {
+    let id = UUID()
+    let color: Color
+    let value: Double
+    let label: String
+}
+
+struct PieChartView: View {
+    let pieData: [PieSegment]
+
+    var body: some View {
+        Chart(pieData) { segment in
+            SectorMark(
+                angle: .value("Value", segment.value)
+            )
+            .foregroundStyle(segment.color)
+        }
+        .frame(width: 300, height: 300)
+        .padding()
+    }
+}
 
 struct HomeView: View {
+    let pieData = [
+        PieSegment(color: .green, value: 60, label: "Educational Activity"),
+        PieSegment(color: .red, value: 40, label: "Entertainment Activity")
+    ]
+    
     var body: some View {
         NavigationView {
-            VStack(spacing: 30) {  // Increased spacing between items
+            VStack(spacing: 20) {  // Increased spacing between items
                 
                 // Main Title
                 Text("Today’s Activity")
-                // Custom font size and weight
                     .font(.system(size: 36, weight: .bold, design: .default))
-                    .padding(.top, 40)
+                    .padding(.top, 10)
                 
                 // Pie Chart
-                Circle()
-                    .fill(Color.green)
-                    .frame(width: 200, height: 200)
-                    .padding()
+                PieChartView(pieData: pieData)
                 
                 Text("Points Rule: 10 points every hour on Educational Activity")
                     .font(.subheadline)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
+                
+                Spacer()
             }
-            
-            // Points
             .toolbar {
+                // Points
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Image(systemName: "dollarsign.circle")
@@ -67,7 +93,6 @@ struct HomeView: View {
 }
 
 
-    
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
