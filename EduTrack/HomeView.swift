@@ -10,12 +10,14 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {  // Increased spacing between items
+                
+                // Main Title
                 Text("Today’s Activity")
                 // Custom font size and weight
-                    .font(.system(size: 28, weight: .bold, design: .default))
+                    .font(.system(size: 36, weight: .bold, design: .default))
                     .padding(.top, 40)
                 
-                // Replace this placeholder with your pie chart
+                // Pie Chart
                 Circle()
                     .fill(Color.green)
                     .frame(width: 200, height: 200)
@@ -26,24 +28,37 @@ struct HomeView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
             }
-
             
+            // Points
             .toolbar {
-                // Settings button to navigate to settings
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        Image(systemName: "dollarsign.circle")
+                            .imageScale(.large)
+                            .font(.system(size: 24))
+                            .foregroundColor(.black)
+                            .padding(.top, 5)
+                        
+                        Text("07000")
+                            .font(.custom("DS-Digital", size: 24))
+                            .foregroundColor(.black)
+                    }
+                }
+                
+                // Settings
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SettingView()) {
                         VStack(spacing: 2) {
-                            // Icon for settings
                             Image(systemName: "gearshape")
                                 .imageScale(.large)
                                 .font(.system(size: 24))
                                 .foregroundColor(.black)
-                            // Letter for settings
+                                .padding(.top, 10)
                             Text("Settings")
                                 .font(.system(size: 14))
                                 .foregroundColor(.black)
+                                .padding(.bottom, 5)
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     }
                 }
             }
@@ -58,4 +73,3 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
-

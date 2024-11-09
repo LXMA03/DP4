@@ -6,6 +6,10 @@
 	objectVersion = 70;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3FFF10FE2CDF2F82009F0D9B /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF10FD2CDF2F82009F0D9B /* DS-DIGI.TTF */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		18947EB52CC77CA800B8CCED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,10 +31,21 @@
 		18947EA42CC77CA600B8CCED /* EduTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18947EB42CC77CA800B8CCED /* EduTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18947EBE2CC77CA800B8CCED /* EduTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FFF10FD2CDF2F82009F0D9B /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3FFF10FC2CDF2F42009F0D9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 18947EA32CC77CA600B8CCED /* EduTrack */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		18947EA62CC77CA600B8CCED /* EduTrack */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = EduTrack; path = /Users/Jane/Documents/EduTrack/EduTrack; sourceTree = "<absolute>"; };
+		18947EA62CC77CA600B8CCED /* EduTrack */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3FFF10FC2CDF2F42009F0D9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = EduTrack; path = /Users/Jane/Documents/EduTrack/EduTrack; sourceTree = "<absolute>"; };
 		18947EB72CC77CA800B8CCED /* DP4Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4Tests; sourceTree = "<group>"; };
 		18947EC12CC77CA800B8CCED /* DP4UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4UITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -63,6 +78,7 @@
 		18947E9B2CC77CA600B8CCED = {
 			isa = PBXGroup;
 			children = (
+				3FFF10FD2CDF2F82009F0D9B /* DS-DIGI.TTF */,
 				18947EA62CC77CA600B8CCED /* EduTrack */,
 				18947EB72CC77CA800B8CCED /* DP4Tests */,
 				18947EC12CC77CA800B8CCED /* DP4UITests */,
@@ -200,6 +216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FFF10FE2CDF2F82009F0D9B /* DS-DIGI.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +404,7 @@
 				DEVELOPMENT_TEAM = G5QX445MRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EduTrack/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -417,6 +435,7 @@
 				DEVELOPMENT_TEAM = G5QX445MRL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EduTrack/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
