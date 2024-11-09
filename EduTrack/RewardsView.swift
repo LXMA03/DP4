@@ -7,6 +7,9 @@
 import SwiftUI
 
 struct RewardsView: View {
+    @State private var showAlert = false
+    @State private var selectedItem: String = ""
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -15,6 +18,9 @@ struct RewardsView: View {
                 Text("Rewards")
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 15)
+                Text("Use your points to redeem real-life rewards!")
+                    .font(.system(size: 14, design: .default))
+                    .padding(.top, -10)
                         
                         // Rewards List
                         List {
@@ -34,12 +40,9 @@ struct RewardsView: View {
                             }
                                 .padding(.top, 10)
                                 .padding(.bottom, 7)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .alignmentGuide(.leading) { d in d[.leading] }) {
-                                    Text("Plushie")
-                                        .padding(.leading)
-                                    Text("Keychain")
-                                        .padding(.leading)
+                                .padding(.leading, -15)) {
+                                    RewardItemButton(title: "Plushie", showAlert: $showAlert, selectedItem: $selectedItem)
+                                    RewardItemButton(title: "Keychain", showAlert: $showAlert, selectedItem: $selectedItem)
                                 }
                             
                             // List for 15,000 points
@@ -58,12 +61,9 @@ struct RewardsView: View {
                             }
                                 .padding(.top, 10)
                                 .padding(.bottom, 7)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .alignmentGuide(.leading) { d in d[.leading] }) {
-                                    Text("Statbucks Drink")
-                                        .padding(.leading)
-                                    Text("Movie Ticket")
-                                        .padding(.leading)
+                                .padding(.leading, -15)) {
+                                    RewardItemButton(title: "Starbucks Drink", showAlert: $showAlert, selectedItem: $selectedItem)
+                                    RewardItemButton(title: "Movie Ticket", showAlert: $showAlert, selectedItem: $selectedItem)
                                 }
                             
                             // List for 20,000 points
@@ -82,12 +82,9 @@ struct RewardsView: View {
                             }
                                 .padding(.top, 10)
                                 .padding(.bottom, 7)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .alignmentGuide(.leading) { d in d[.leading] }) {
-                                    Text("$15 Gift Card")
-                                        .padding(.leading)
-                                    Text("Chick-fil-A Meal")
-                                        .padding(.leading)
+                                .padding(.leading, -15)) {
+                                    RewardItemButton(title: "$15 Gift Card", showAlert: $showAlert, selectedItem: $selectedItem)
+                                    RewardItemButton(title: "Chick-fil-A Meal", showAlert: $showAlert, selectedItem: $selectedItem)
                                 }
                         }
                             
@@ -134,11 +131,41 @@ struct RewardsView: View {
                             }
                         }
                     }
-                    
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Sorry!"),
+                    message: Text("You do not have enough points to redeem \(selectedItem)"),
+                    dismissButton: .default(Text("OK"))
+                )
             }
         }
     }
-        
+}
+struct RewardItemButton: View {
+    let title: String
+    @Binding var showAlert: Bool
+    @Binding var selectedItem: String
+
+    var body: some View {
+        Button(action: {
+            selectedItem = title
+            showAlert = true
+        }) {
+            Text(title)
+                .padding(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+        }
+        .buttonStyle(HighlightButtonStyle())
+    }
+}
+struct HighlightButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? Color.blue.opacity(0.3) : Color.clear)
+            .cornerRadius(8)
+    }
+}
     struct RewardsView_Preview: PreviewProvider {
         static var previews: some View {
             RewardsView()
