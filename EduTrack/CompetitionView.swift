@@ -3,7 +3,7 @@
 //  DP4
 //
 //  Created by Cynthia Rosales on 10/22/24. Worked further on by Muhammad Khan on 11/04/2024
-//
+
 import SwiftUI
 
 // Define a model for each competition
@@ -48,7 +48,7 @@ struct CompetitionView: View {
                                         .foregroundColor(.black)
                                         .padding(.top, 5)
                                     
-                                    Text("07000")
+                                    Text("7000")
                                         .font(.custom("DS-Digital", size: 24))
                                         .foregroundColor(.black)
                                     Text("pts")

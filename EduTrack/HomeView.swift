@@ -106,7 +106,7 @@ struct HomeView: View {
                                 .foregroundColor(.black)
                                 .padding(.top, 5)
                             
-                            Text("07000")
+                            Text("7000")
                                 .font(.custom("DS-Digital", size: 24))
                                 .foregroundColor(.black)
                             Text("pts")

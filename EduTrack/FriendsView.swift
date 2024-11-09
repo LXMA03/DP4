@@ -21,8 +21,15 @@ struct FriendsView: View {
         Friend(name: "Muhammad", isSelected: false)
     ]
     
+    @State private var challenges = [
+            Challenge(title: "Challenge with Lydia", description: "Limit screen time to 3 hours per day", duration: "Weekly", points: 50, status: "In Progress"),
+            Challenge(title: "Challenge with Muhammad", description: "No social media usage for 12 hours", duration: "Daily", points: 100, status: "Pending"),
+            Challenge(title: "Challenge with Jane", description: "Limit social media apps under 12 hours per week", duration: "Monthly", points: 150, status: "In Progress"),
+    ]
+    
     // ChallengesView
     @State private var showChallengesView = false
+    @State private var selectedFriendName = ""
     @State private var showIndividualChallengeView = false
     @State private var showAlert = false
     
@@ -48,7 +55,7 @@ struct FriendsView: View {
                                         .foregroundColor(.black)
                                         .padding(.top, 5)
                                     
-                                    Text("07000")
+                                    Text("7000")
                                         .font(.custom("DS-Digital", size: 24))
                                         .foregroundColor(.black)
                                     Text("pts")
@@ -85,11 +92,13 @@ struct FriendsView: View {
                             .onTapGesture {
                                 if friend.isSelected {
                                     friend.isSelected = false
+                                    selectedFriendName = ""
                                 } else {
                                     for index in friends.indices {
                                         friends[index].isSelected = false
                                     }
                                     friend.isSelected = true
+                                    selectedFriendName = friend.name
                                 }
                             }
                     }
@@ -127,7 +136,7 @@ struct FriendsView: View {
                     )
                 }
                 .sheet(isPresented: $showChallengesView) {
-                    ChallengesView()
+                    ChallengesView(challenges: $challenges, selectedFriendName: selectedFriendName)
                 }
                 .sheet(isPresented: $showIndividualChallengeView) {
                     IndividualChallengeView()
