@@ -23,6 +23,7 @@ struct FriendsView: View {
     
     // Will show ChallengesView
     @State private var showChallengesView = false
+    @State private var showAlert = false
     
     // Navigation
     var body: some View {
@@ -49,15 +50,27 @@ struct FriendsView: View {
                     }
                     else {
                         // Ask if user is sure they don't want to play with friends
+                        showAlert = true
                     }
                     
                 }) {
                     Text("Go to Challenges")
                         .padding()
                         .foregroundColor(.white)
+                        .background(Color.blue)
                         .cornerRadius(8)
                 }
                 .padding()
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("No Friends Selected"),
+                        message: Text("Are you sure you want to proceed without selecting any friends?"),
+                        primaryButton: .default(Text("Yes"), action: {
+                            showChallengesView = true // "Yes" button proceeds to ChallengesView even if no friends are chosen
+                        }),
+                        secondaryButton: .cancel(Text("No")) // "No" button cancels the action
+                    )
+                }
                 .sheet(isPresented: $showChallengesView) {
                     ChallengesView()
                 }
