@@ -35,17 +35,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3FFF10FC2CDF2F42009F0D9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		18393AE22CE01FF5005B0595 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				ChallengesView.swift,
+				CompetitionView.swift,
+				ContentView.swift,
+				DP4App.swift,
+				FriendsView.swift,
+				HomeView.swift,
+				IndividualChallangeView.swift,
+				ProfileView.swift,
+				RewardsView.swift,
+				Settings.swift,
 			);
 			target = 18947EA32CC77CA600B8CCED /* EduTrack */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		18947EA62CC77CA600B8CCED /* EduTrack */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3FFF10FC2CDF2F42009F0D9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = EduTrack; path = /Users/Jane/Documents/EduTrack/EduTrack; sourceTree = "<absolute>"; };
+		18393AE02CE01FEB005B0595 /* EduTrack */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (18393AE22CE01FF5005B0595 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = EduTrack; path = /Users/lydiama/Desktop/Xcode/EduTrack/EduTrack; sourceTree = "<absolute>"; };
 		18947EB72CC77CA800B8CCED /* DP4Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4Tests; sourceTree = "<group>"; };
 		18947EC12CC77CA800B8CCED /* DP4UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DP4UITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -79,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				3FFF10FD2CDF2F82009F0D9B /* DS-DIGI.TTF */,
-				18947EA62CC77CA600B8CCED /* EduTrack */,
+				18393AE02CE01FEB005B0595 /* EduTrack */,
 				18947EB72CC77CA800B8CCED /* DP4Tests */,
 				18947EC12CC77CA800B8CCED /* DP4UITests */,
 				18947EA52CC77CA600B8CCED /* Products */,
@@ -110,9 +119,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				18947EA62CC77CA600B8CCED /* EduTrack */,
 			);
 			name = EduTrack;
 			packageProductDependencies = (
@@ -401,7 +407,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EduTrack/Preview Content\"";
-				DEVELOPMENT_TEAM = G5QX445MRL;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EduTrack/Info.plist;
@@ -432,7 +438,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EduTrack/Preview Content\"";
-				DEVELOPMENT_TEAM = G5QX445MRL;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EduTrack/Info.plist;
