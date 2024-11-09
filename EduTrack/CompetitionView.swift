@@ -9,17 +9,18 @@ import SwiftUI
 
 struct Competition: Identifiable {
     let id = UUID()
-    let name: String
+    let title: String
+    let description: String
     var participants: Int
     var progress: Double
 }
 
 let sampleCompetitions = [
     Competition(
-        name: "Competitive Challenge: Challenge with Lydia", participants: 2,
+        title: "Competitive Challenge", description: "Challenge with LydiaL Limit screen time to 3 hours per day", participants: 2,
         progress: 0.6),
     Competition(
-        name: "Individual Challenge: Challenge 1", participants: 1,
+        title: "Individual Challenge", description: "Challenge 1: Learn new language using Duolingo for 24 hours", participants: 1,
         progress: 0.4)
 ]
 
@@ -38,20 +39,20 @@ struct CompetitionView: View {
                     .toolbar {
                         // Points
                         ToolbarItem(placement: .navigationBarLeading) {
-                                HStack {
-                                    Image(systemName: "dollarsign.circle")
-                                        .imageScale(.large)
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.black)
-                                        .padding(.top, 5)
-                                    
-                                    Text("7000")
-                                        .font(.custom("DS-Digital", size: 24))
-                                        .foregroundColor(.black)
-                                    Text("pts")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.black)
-                                }
+                            HStack {
+                                Image(systemName: "dollarsign.circle")
+                                    .imageScale(.large)
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.black)
+                                    .padding(.top, 5)
+                                
+                                Text("7000")
+                                    .font(.custom("DS-Digital", size: 24))
+                                    .foregroundColor(.black)
+                                Text("pts")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(.black)
+                            }
                         }
                         
                         // Settings
@@ -76,14 +77,20 @@ struct CompetitionView: View {
                 ScrollView {
                     ForEach(competitions) { competition in
                         VStack(alignment: .leading, spacing: 8) {
+                            Text(competition.title)
+                                .font(.headline)
+                            
+                            Text(competition.description)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                            
                             HStack {
-                                Text(competition.name)
-                                    .font(.headline)
                                 Spacer()
                                 Text("\(competition.participants) Participants")
-                                    .font(.subheadline)
+                                    .font(.footnote)
                                     .foregroundColor(.gray)
                             }
+                            
                             // Progress bar
                             ProgressView(value: competition.progress)
                                 .progressViewStyle(LinearProgressViewStyle(tint: .blue))
@@ -94,7 +101,7 @@ struct CompetitionView: View {
                         .background(Color.white)
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                        .padding(.horizontal)
+                        .padding([.horizontal, .top])
                     }
                 }
                 
