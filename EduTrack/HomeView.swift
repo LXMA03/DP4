@@ -87,11 +87,21 @@ struct HomeView: View {
                 .padding(.leading, 30)
                 
                 // Points Rule
-                Text("Earn 10 points every hour on Educational Activity")
-                    .font(.system(size: 20, weight: .semibold))
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 40)
-                    .padding(.horizontal, 20)
+                HStack {
+                    Text("★")
+                        .font(.system(size: 20))
+                        .foregroundColor(.yellow)
+                    
+                    Text("Earn 10 points every hour on Educational Activity")
+                        .font(.system(size: 20, weight: .semibold))
+                        .multilineTextAlignment(.center)
+                    
+                    Text("★")
+                        .font(.system(size: 20))
+                        .foregroundColor(.yellow)
+                }
+                .padding(.top, 40)
+                .padding(.horizontal, 20)
 
                 Spacer()
             }
@@ -135,7 +145,6 @@ struct HomeView: View {
         }
     }
 }
-
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

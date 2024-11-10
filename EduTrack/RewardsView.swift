@@ -14,7 +14,6 @@ struct RewardsView: View {
         NavigationView {
             VStack(spacing: 20) {
                 
-                // Main Title
                 Text("Rewards")
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 15)
@@ -22,115 +21,107 @@ struct RewardsView: View {
                     .font(.system(size: 14, design: .default))
                     .padding(.top, -10)
                         
-                        // Rewards List
-                        List {
-                            // List for 10,000 points
-                            Section(header: HStack {
-                                Text("Redeem for")
-                                    .font(.system(size: 24, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .textCase(.none)
-                                Text("10000")
-                                    .font(.custom("DS-Digital", size: 24))
-                                    .foregroundColor(.black)
-                                Text("points")
-                                    .font(.system(size: 24, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .textCase(.none)
-                            }
-                                .padding(.top, 10)
-                                .padding(.bottom, 7)
-                                .padding(.leading, -15)) {
-                                    RewardItemButton(title: "Plushie", showAlert: $showAlert, selectedItem: $selectedItem)
-                                    RewardItemButton(title: "Keychain", showAlert: $showAlert, selectedItem: $selectedItem)
-                                }
-                            
-                            // List for 15,000 points
-                            Section(header: HStack {
-                                Text("Redeem for")
-                                    .font(.system(size: 24, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .textCase(.none)
-                                Text("15000")
-                                    .font(.custom("DS-Digital", size: 24))
-                                    .foregroundColor(.black)
-                                Text("points")
-                                    .font(.system(size: 24, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .textCase(.none)
-                            }
-                                .padding(.top, 10)
-                                .padding(.bottom, 7)
-                                .padding(.leading, -15)) {
-                                    RewardItemButton(title: "Starbucks Drink", showAlert: $showAlert, selectedItem: $selectedItem)
-                                    RewardItemButton(title: "Movie Ticket", showAlert: $showAlert, selectedItem: $selectedItem)
-                                }
-                            
-                            // List for 20,000 points
-                            Section(header: HStack {
-                                Text("Redeem for")
-                                    .font(.system(size: 24, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .textCase(.none)
-                                Text("20000")
-                                    .font(.custom("DS-Digital", size: 24))
-                                    .foregroundColor(.black)
-                                Text("points")
-                                    .font(.system(size: 24, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .textCase(.none)
-                            }
-                                .padding(.top, 10)
-                                .padding(.bottom, 7)
-                                .padding(.leading, -15)) {
-                                    RewardItemButton(title: "$15 Gift Card", showAlert: $showAlert, selectedItem: $selectedItem)
-                                    RewardItemButton(title: "Chick-fil-A Meal", showAlert: $showAlert, selectedItem: $selectedItem)
-                                }
-                        }
-                            
-                        .listStyle(InsetGroupedListStyle())
-                        .background(Color.white)
-                        .scrollContentBackground(.hidden)
+                List {
+                    Section(header: HStack {
+                        Text("Redeem for")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.black)
+                            .textCase(.none)
+                        Text("10000")
+                            .font(.custom("DS-Digital", size: 24))
+                            .foregroundColor(.black)
+                        Text("points")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.black)
+                            .textCase(.none)
+                    }
+                    .padding(.top, 10)
+                    .padding(.bottom, 7)
+                    .padding(.leading, -15)) {
+                        RewardItemButton(title: "Plushie", showAlert: $showAlert, selectedItem: $selectedItem)
+                        RewardItemButton(title: "Keychain", showAlert: $showAlert, selectedItem: $selectedItem)
+                    }
+                    
+                    Section(header: HStack {
+                        Text("Redeem for")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.black)
+                            .textCase(.none)
+                        Text("15000")
+                            .font(.custom("DS-Digital", size: 24))
+                            .foregroundColor(.black)
+                        Text("points")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.black)
+                            .textCase(.none)
+                    }
+                    .padding(.top, 10)
+                    .padding(.bottom, 7)
+                    .padding(.leading, -15)) {
+                        RewardItemButton(title: "Starbucks Drink", showAlert: $showAlert, selectedItem: $selectedItem)
+                        RewardItemButton(title: "Movie Ticket", showAlert: $showAlert, selectedItem: $selectedItem)
+                    }
+                    
+                    Section(header: HStack {
+                        Text("Redeem for")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.black)
+                            .textCase(.none)
+                        Text("20000")
+                            .font(.custom("DS-Digital", size: 24))
+                            .foregroundColor(.black)
+                        Text("points")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.black)
+                            .textCase(.none)
+                    }
+                    .padding(.top, 10)
+                    .padding(.bottom, 7)
+                    .padding(.leading, -15)) {
+                        RewardItemButton(title: "$15 Gift Card", showAlert: $showAlert, selectedItem: $selectedItem)
+                        RewardItemButton(title: "Chick-fil-A Meal", showAlert: $showAlert, selectedItem: $selectedItem)
+                    }
+                }
+                .listStyle(InsetGroupedListStyle())
+                .background(Color.white)
+                .scrollContentBackground(.hidden)
                 
-                        Spacer()
-                        }
-            
+                Spacer()
+            }
             .toolbar {
-                // Points
                 ToolbarItem(placement: .navigationBarLeading) {
-                        HStack {
-                            Image(systemName: "dollarsign.circle")
+                    HStack {
+                        Image(systemName: "dollarsign.circle")
+                            .imageScale(.large)
+                            .font(.system(size: 24))
+                            .foregroundColor(.black)
+                            .padding(.top, 5)
+                        
+                        Text("7000")
+                            .font(.custom("DS-Digital", size: 24))
+                            .foregroundColor(.black)
+                        Text("pts")
+                            .font(.system(size: 18))
+                            .foregroundColor(.black)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SettingView()) {
+                        VStack(spacing: 2) {
+                            Image(systemName: "gearshape")
                                 .imageScale(.large)
                                 .font(.system(size: 24))
                                 .foregroundColor(.black)
-                                .padding(.top, 5)
-                            
-                            Text("7000")
-                                .font(.custom("DS-Digital", size: 24))
+                                .padding(.top, 25)
+                            Text("Settings")
+                                .font(.system(size: 14))
                                 .foregroundColor(.black)
-                            Text("pts")
-                                .font(.system(size: 18))
-                                .foregroundColor(.black)
-                        }
-                }
-                        
-                        // Settings
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: SettingView()) {
-                                VStack(spacing: 2) {
-                                    Image(systemName: "gearshape")
-                                        .imageScale(.large)
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.black)
-                                        .padding(.top, 25)
-                                    Text("Settings")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.black)
-                                        .padding(.bottom, 5)
-                                }
-                            }
+                                .padding(.bottom, 5)
                         }
                     }
+                }
+            }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Sorry!"),
@@ -141,6 +132,7 @@ struct RewardsView: View {
         }
     }
 }
+
 struct RewardItemButton: View {
     let title: String
     @Binding var showAlert: Bool
@@ -151,14 +143,21 @@ struct RewardItemButton: View {
             selectedItem = title
             showAlert = true
         }) {
-            Text(title)
-                .padding(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
+            HStack {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+                    .padding(.trailing, 5)
+                
+                Text(title)
+                    .padding(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+            }
         }
         .buttonStyle(HighlightButtonStyle())
     }
 }
+
 struct HighlightButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -166,8 +165,10 @@ struct HighlightButtonStyle: ButtonStyle {
             .cornerRadius(8)
     }
 }
-    struct RewardsView_Preview: PreviewProvider {
-        static var previews: some View {
-            RewardsView()
+
+struct RewardsView_Preview: PreviewProvider {
+    static var previews: some View {
+        RewardsView()
     }
 }
+
