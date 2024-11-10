@@ -7,3 +7,5 @@ Our app motivates users to engage more with educational apps by competing in fun
 Our goal is to help users reduce time spent on social media and entertainment apps and increase their focus on educational content through gamified phone usage and a real-life rewards system.
 
 Built with: Visual Studio Code, Swift Playground, and XCode
+
+YouTube Link: https://youtu.be/shnvd8O9DAk
