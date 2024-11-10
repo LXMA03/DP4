@@ -15,13 +15,14 @@ struct Competition: Identifiable {
     var progress: Double
 }
 
+// Updated sample data with the specific "Challenge with Lydia"
 let sampleCompetitions = [
     Competition(
-        title: "Competitive Challenge", description: "Challenge with LydiaL Limit screen time to 3 hours per day", participants: 2,
-        progress: 0.6),
-    Competition(
-        title: "Individual Challenge", description: "Challenge 1: Learn new language using Duolingo for 24 hours", participants: 1,
-        progress: 0.4)
+        title: "Challenge with Lydia",
+        description: "Limit screen time to 3 hours per day",
+        participants: 2,
+        progress: 0.6
+    )
 ]
 
 struct CompetitionView: View {
@@ -36,42 +37,42 @@ struct CompetitionView: View {
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 30)
                 
-                    .toolbar {
-                        // Points
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            HStack {
-                                Image(systemName: "dollarsign.circle")
+                .toolbar {
+                    // Points
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                                .imageScale(.large)
+                                .font(.system(size: 24))
+                                .foregroundColor(.black)
+                                .padding(.top, 5)
+                            
+                            Text("7000")
+                                .font(.custom("DS-Digital", size: 24))
+                                .foregroundColor(.black)
+                            Text("pts")
+                                .font(.system(size: 18))
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
+                    // Settings
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SettingView()) {
+                            VStack(spacing: 2) {
+                                Image(systemName: "gearshape")
                                     .imageScale(.large)
                                     .font(.system(size: 24))
                                     .foregroundColor(.black)
-                                    .padding(.top, 5)
-                                
-                                Text("7000")
-                                    .font(.custom("DS-Digital", size: 24))
+                                    .padding(.top, 25)
+                                Text("Settings")
+                                    .font(.system(size: 14))
                                     .foregroundColor(.black)
-                                Text("pts")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(.black)
-                            }
-                        }
-                        
-                        // Settings
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: SettingView()) {
-                                VStack(spacing: 2) {
-                                    Image(systemName: "gearshape")
-                                        .imageScale(.large)
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.black)
-                                        .padding(.top, 25)
-                                    Text("Settings")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.black)
-                                        .padding(.bottom, 5)
-                                }
+                                    .padding(.bottom, 5)
                             }
                         }
                     }
+                }
 
                 // List of competitions
                 ScrollView {
