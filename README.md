@@ -9,3 +9,5 @@ Our goal is to help users reduce time spent on social media and entertainment ap
 Built with: Visual Studio Code, Swift Playground, and XCode
 
 YouTube Link: https://youtu.be/shnvd8O9DAk
+
+GitHub Link: https://github.com/LXMA03/EduTrack.git
