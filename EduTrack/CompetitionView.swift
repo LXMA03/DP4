@@ -32,7 +32,7 @@ struct CompetitionView: View {
     @State private var showLeaderboard = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 20) {
                 
                 Text("Competition")

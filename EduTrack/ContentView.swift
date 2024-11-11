@@ -73,7 +73,7 @@ struct ContentView: View {
 // Sample Views for the Tab Items
 struct Home_View: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Text("Welcome to the Home Screen!")
                     .font(.title)

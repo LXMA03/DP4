@@ -201,7 +201,7 @@ struct IndividualChallengeSelectionView: View {
 
     var body: some View {
         VStack {
-            NavigationView {
+            NavigationStack {
                 List($challenges) { $challenge in
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
