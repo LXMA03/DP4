@@ -108,15 +108,13 @@ struct FriendsView: View {
                 .scrollContentBackground(.hidden)
                 
                 Button(action: {
-                    if friends.contains(where: { $0.isSelected}) {
-                        // Show challenge page if 1 friend is selected
+                    if friends.contains(where: { $0.isSelected }) {
+                        // Show challenge page if a friend is selected
                         showChallengesView = true
-                    }
-                    else {
-                        // Ask user to confirm when no one is selected
+                    } else {
+                        // Show alert if no friend is selected
                         showAlert = true
                     }
-                    
                 }) {
                     Text("Go to Challenges")
                         .font(.headline)
@@ -128,15 +126,11 @@ struct FriendsView: View {
                         .padding(.horizontal)
                         .padding(.bottom, 20)
                 }
-                .padding()
                 .alert(isPresented: $showAlert) {
                     Alert(
-                        title: Text("No Friend Selected"),
-                        message: Text("Are you sure you want to proceed?"),
-                        primaryButton: .default(Text("Confirm"), action: {
-                            showIndividualChallengeView = true
-                        }),
-                    secondaryButton: .cancel(Text("No"))
+                        title: Text("No Friends Selected"),
+                        message: Text("Choose a friend to compete with!"),
+                        dismissButton: .default(Text("Ok"))
                     )
                 }
                 .sheet(isPresented: $showChallengesView) {
