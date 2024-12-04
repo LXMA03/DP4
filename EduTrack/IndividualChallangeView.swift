@@ -67,7 +67,7 @@ struct IndividualChallengeView: View {
                 Text("Individual Challenge")
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 30)
-                Text("Track In Progress challenges in Competition tab!")
+                Text("Challenge yourself and earn points")
                     .font(.system(size: 14, design: .default))
                     .padding(.top, -10)
                 

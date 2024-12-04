@@ -179,17 +179,6 @@ struct PersonalInformationView: View {
                     .background(Color.white)
                 }
 
-                NavigationLink(destination: ChangeProfilePictureView()) {
-                    HStack {
-                        Text("Change Profile Picture")
-                            .foregroundColor(.black)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                    .padding()
-                    .background(Color.white)
-                }
             }
             .padding(.horizontal)
             .cornerRadius(10)
@@ -308,52 +297,6 @@ struct ChangeEmailView: View {
             
             Spacer()
         }
-    }
-}
-
-struct ChangeProfilePictureView: View {
-    @State private var selectedAvatar: String? = nil
-    @State private var showConfirmation = false
-    private let avatars = ["person.circle.fill", "star.fill", "heart.fill", "flame.fill"]
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("Change Profile Picture")
-                .font(.system(size: 36, weight: .semibold))
-                .padding(.top, 30)
-            
-            HStack(spacing: 15) {
-                ForEach(avatars, id: \.self) { avatar in
-                    Image(systemName: avatar)
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .foregroundColor(selectedAvatar == avatar ? .blue : .gray)
-                        .onTapGesture {
-                            selectedAvatar = avatar
-                        }
-                }
-            }
-            .padding(.vertical)
-            
-            Button(action: {
-                showConfirmation = true
-            }) {
-                Text("Confirm")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding(.horizontal)
-            .alert(isPresented: $showConfirmation) {
-                Alert(title: Text("All set!"), message: Text("Profile picture updated"), dismissButton: .default(Text("OK")))
-            }
-            
-            Spacer()
-        }
-        .background(Color.white.ignoresSafeArea())
     }
 }
 

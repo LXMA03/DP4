@@ -125,7 +125,7 @@ struct RewardsView: View {
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Sorry!"),
-                    message: Text("You do not have enough points to redeem \(selectedItem)"),
+                    message: Text("Insufficient points to redeem \(selectedItem)"),
                     dismissButton: .default(Text("OK"))
                 )
             }
