@@ -55,7 +55,14 @@ struct IndividualChallengeView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var totalPoints = 7000
     @State private var challenges = individualChallenges
+    @State private var availableChallenges = [
+        ChallengeItem(title: "Limit screen time to 4 hours per day", label: "Weekly",
+                points: 80),
+        ChallengeItem(title: "Study using Quizlet for 40 hours", label: "Weekly", points: 300),
+        ChallengeItem(title: "Study using Google PowerPoint for 1 hour per day", label: "Monthly", points: 400)
+    ]
     @State private var showChallengeSelection = false
+    @State private var showCustomizeChallenge = false
     @State private var showDeleteConfirmation = false
     @State private var challengeToDelete: Challenge? = nil
     @State private var nextChallengeNumber = 4
@@ -63,7 +70,6 @@ struct IndividualChallengeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
                 // Main Title
                 Text("Individual Challenge")
                     .font(.system(size: 36, weight: .semibold))
@@ -134,14 +140,7 @@ struct IndividualChallengeView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.white)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            showChallengeSelection = true
-                        }) {
-                            Image(systemName: "plus")
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) { 
+                    ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
                         }) {
@@ -150,10 +149,35 @@ struct IndividualChallengeView: View {
                                 .foregroundColor(.black)
                         }
                     }
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            Button(action: {
+                                showChallengeSelection = true
+                            }) {
+                                Text("Select a Challenge")
+                                Image(systemName: "list.bullet")
+                            }
+                            Button(action: {
+                                showCustomizeChallenge = true
+                            }) {
+                                Text("Customize a Challenge")
+                                Image(systemName: "pencil")
+                            }
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                    }
                 }
                 .sheet(isPresented: $showChallengeSelection) {
-                    IndividualChallengeSelectionView { selectedChallenge in
+                    ChallengeSelectionView(challenges: $availableChallenges, selectedFriend: "You") { selectedChallenge in
                         addSelectedChallenge(selectedChallenge)
+                    }
+                }
+                .sheet(isPresented: $showCustomizeChallenge) {
+                    CustomizeChallengeView(challenges: $availableChallenges) {
+                        showCustomizeChallenge = false
+                        showChallengeSelection = true
                     }
                 }
                 .alert(isPresented: $showDeleteConfirmation) {
@@ -201,7 +225,6 @@ struct IndividualChallengeView: View {
         }
     }
 }
-
 
 struct IndividualChallengeSelectionView: View {
     @Environment(\.presentationMode) var presentationMode

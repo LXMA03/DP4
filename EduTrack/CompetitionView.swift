@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct CompetitionView: View {
-    @State private var showCompetitiveChallenges = false
     @State private var showIndividualChallenges = false
     @State private var challenges = [
         Challenge(
@@ -67,10 +66,8 @@ struct CompetitionView: View {
                 }
                 
                 VStack(spacing: 15) {
-                    // Button for Competitive Challenges
-                    Button(action: {
-                        showCompetitiveChallenges = true
-                    }) {
+                    // Navigation to FriendsView
+                    NavigationLink(destination: FriendsView()) {
                         Text("Go to Competitive Challenges")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
@@ -80,11 +77,8 @@ struct CompetitionView: View {
                             .cornerRadius(10)
                             .padding(.horizontal)
                     }
-                    .sheet(isPresented: $showCompetitiveChallenges) {
-                        ChallengesView(challenges: $challenges, selectedFriendName: "Competitive Challenges")
-                    }
                     
-                    // Button for Individual Challenges
+                    // Navigation to Individual Challenges
                     Button(action: {
                         showIndividualChallenges = true
                     }) {

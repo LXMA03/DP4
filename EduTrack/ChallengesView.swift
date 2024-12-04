@@ -31,21 +31,15 @@ let CompetitiveChallenges = [
 
 struct ChallengeSelectionView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var challenges = [
-        ChallengeItem(title: "Use educational apps for over 12 hours for a week", label: "Weekly", points: 300),
-        ChallengeItem(title: "Limit social media apps to 1 hour per day", label: "Weekly", points: 100),
-        ChallengeItem(title: "Do not use any apps for 5 hours", label: "Daily", points: 150),
-        ChallengeItem(title: "Limit message app to 3 hours per day", label: "Monthly", points: 500)
-    ]
-    
+    @Binding var challenges: [ChallengeItem]
     @State private var selectedChallenge: ChallengeItem? = nil
     var selectedFriend: String
     var onConfirm: (ChallengeItem) -> Void
 
     var body: some View {
-        VStack {
-            NavigationStack {
-                List($challenges) { $challenge in
+        NavigationView {
+            List {
+                ForEach(challenges) { challenge in
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(challenge.title)
@@ -74,43 +68,96 @@ struct ChallengeSelectionView: View {
                     .contentShape(Rectangle())
                     .listRowBackground(Color.white)
                 }
-                .navigationBarTitle("Select a Challenge", displayMode: .inline)
-                .navigationBarItems(leading: Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
-                })
             }
-            
-            Button(action: {
-                if let selectedChallenge = selectedChallenge {
-                    onConfirm(selectedChallenge)
-                }
+            .navigationBarTitle("Select a Challenge", displayMode: .inline)
+            .navigationBarItems(leading: Button("Cancel") {
                 presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("Confirm")
-                    .font(.title2)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-            }
-            .padding(.bottom, 20)
-            .disabled(selectedChallenge == nil)
+            })
         }
+
+        Button(action: {
+            if let selectedChallenge = selectedChallenge {
+                onConfirm(selectedChallenge)
+                presentationMode.wrappedValue.dismiss()
+            }
+        }) {
+            Text("Confirm")
+                .font(.title2)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding(.horizontal)
+        }
+        .padding(.bottom, 20)
+        .disabled(selectedChallenge == nil)
     }
 }
 
 struct ChallengesView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var challenges: [Challenge]
+    @State private var availableChallenges = [
+        ChallengeItem(title: "Use educational apps for over 12 hours for a week", label: "Weekly", points: 300),
+        ChallengeItem(title: "Limit social media apps to 1 hour per day", label: "Weekly", points: 100),
+        ChallengeItem(title: "Do not use any apps for 5 hours", label: "Daily", points: 150),
+        ChallengeItem(title: "Limit message app to 3 hours per day", label: "Monthly", points: 500)
+    ]
     @State private var totalPoints = 7000
     @State private var showChallengeSelection = false
+    @State private var showCustomizeChallenge = false
+
     var selectedFriendName: String
     @State private var showDeleteConfirmation = false
     @State private var challengeToDelete: Challenge?
     @State private var showStatusMessage = false
     @State private var statusMessage = ""
+    
+    private var dismissButton: some View {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "xmark")
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(.black)
+        }
+    }
+
+    private var challengeMenu: some View {
+        Menu {
+            Button(action: {
+                showChallengeSelection = true
+            }) {
+                Text("Select a Challenge")
+                Image(systemName: "list.bullet")
+            }
+            Button(action: {
+                showCustomizeChallenge = true
+            }) {
+                Text("Customize a Challenge")
+                Image(systemName: "pencil")
+            }
+        } label: {
+            Image(systemName: "plus")
+        }
+    }
+    
+    private func challengeSelectionSheet() -> some View {
+        ChallengeSelectionView(
+            challenges: $availableChallenges,
+            selectedFriend: selectedFriendName
+        ) { selectedChallenge in
+            addSelectedChallenge(selectedChallenge)
+        }
+    }
+
+    private func customizeChallengeSheet() -> some View {
+        CustomizeChallengeView(challenges: $availableChallenges) {
+            showCustomizeChallenge = false
+            showChallengeSelection = true
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -135,6 +182,7 @@ struct ChallengesView: View {
                 }
                 .padding()
 
+                // List of Challenges
                 List {
                     ForEach(challenges) { challenge in
                         VStack {
@@ -157,17 +205,12 @@ struct ChallengesView: View {
                                         .background(Color.yellow)
                                         .cornerRadius(8)
 
-                                    Button(action: {
-                                        handleChallengeTap(challenge: challenge)
-                                    }) {
-                                        Text(challenge.status)
-                                            .font(.caption2)
-                                            .padding(6)
-                                            .background(statusColor(status: challenge.status))
-                                            .foregroundColor(.white)
-                                            .cornerRadius(8)
-                                    }
-                                    .buttonStyle(PlainButtonStyle())
+                                    Text(challenge.status)
+                                        .font(.caption2)
+                                        .padding(6)
+                                        .background(statusColor(status: challenge.status))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
                                 }
                             }
                             .padding()
@@ -189,71 +232,23 @@ struct ChallengesView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.white)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) { 
-                        Button(action: {
-                            presentationMode.wrappedValue.dismiss()
-                        }) {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundColor(.black)
-                        }
+                    // Leading Toolbar Item
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        dismissButton
                     }
-                    
+
+                    // Trailing Toolbar Menu
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            showChallengeSelection = true
-                        }) {
-                            Image(systemName: "plus")
-                        }
+                        challengeMenu
                     }
                 }
-                .sheet(isPresented: $showChallengeSelection) {
-                    ChallengeSelectionView(selectedFriend: selectedFriendName) { selectedChallenge in
-                        addSelectedChallenge(selectedChallenge)
-                    }
-                }
-                .alert(isPresented: $showStatusMessage) {
-                    Alert(title: Text(statusMessage), dismissButton: .default(Text("OK")))
-                }
-                .alert(isPresented: $showDeleteConfirmation) {
-                    Alert(
-                        title: Text("Stopping Challenge"),
-                        message: Text("Are you sure you want to proceed?"),
-                        primaryButton: .destructive(Text("Confirm"), action: {
-                            if let challengeToDelete = challengeToDelete,
-                               let index = challenges.firstIndex(where: { $0.id == challengeToDelete.id }) {
-                                challenges.remove(at: index)
-                            }
-                        }),
-                        secondaryButton: .cancel(Text("No"))
-                    )
-                }
+
+                .sheet(isPresented: $showChallengeSelection, content: challengeSelectionSheet)
+                .sheet(isPresented: $showCustomizeChallenge, content: customizeChallengeSheet)
             }
-        }
-        .onAppear {
-            calculateTotalPoints()
-        }
-    }
-
-    private func handleChallengeTap(challenge: Challenge) {
-        if challenge.status == "In Progress" {
-            statusMessage = "Check on competition section to see your progress"
-        } else if challenge.status == "Pending" {
-            statusMessage = "Waiting for opponent's confirmation"
-        }
-        showStatusMessage = true
-    }
-
-    private func statusColor(status: String) -> Color {
-        switch status {
-        case "Completed":
-            return Color.green
-        case "In Progress":
-            return Color.orange
-        case "Pending":
-            return Color.red
-        default:
-            return Color.gray
+            .onAppear {
+                calculateTotalPoints()
+            }
         }
     }
 
@@ -270,5 +265,18 @@ struct ChallengesView: View {
 
     private func calculateTotalPoints() {
         totalPoints = 7000 + challenges.filter { $0.status == "Completed" }.reduce(0) { $0 + $1.points }
+    }
+
+    private func statusColor(status: String) -> Color {
+        switch status {
+        case "Completed":
+            return Color.green
+        case "In Progress":
+            return Color.orange
+        case "Pending":
+            return Color.red
+        default:
+            return Color.gray
+        }
     }
 }

@@ -32,24 +32,6 @@ struct ProfileView: View {
                         .foregroundColor(.black)
                 }
                 
-                HStack(spacing: 30) {
-                    VStack {
-                        Text("Active Challenge")
-                            .font(.headline)
-                        Text("2")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(.blue)
-                    }
-                    VStack {
-                        Text("Completed Challenge")
-                            .font(.headline)
-                        Text("10")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(.green)
-                    }
-                }
                 .padding(.top, 20)
                 Divider()
                     .padding(.vertical, 10)
