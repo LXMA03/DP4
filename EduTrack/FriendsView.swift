@@ -121,9 +121,12 @@ struct FriendsView: View {
                     Text("Go to Challenges")
                         .font(.headline)
                         .padding()
+                        .frame(maxWidth: .infinity)
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
+                        .padding(.horizontal)
+                        .padding(.bottom, 20)
                 }
                 .padding()
                 .alert(isPresented: $showAlert) {
