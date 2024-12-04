@@ -117,7 +117,6 @@ struct IndividualChallengeView: View {
                             .padding()
                             .background(Color.white)
                             .cornerRadius(10)
-                            .shadow(radius: 2)
                         }
                         .padding(.vertical, 8)
                         .listRowBackground(Color.clear)

@@ -121,7 +121,7 @@ struct ChallengesView: View {
                 Text("Competitive Challenge")
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 30)
-                Text("Compete with friends and family")
+                Text("Compete with friends and family!")
                     .font(.system(size: 14, design: .default))
                     .padding(.top, -10)
 
@@ -175,7 +175,6 @@ struct ChallengesView: View {
                             .padding()
                             .background(Color.white)
                             .cornerRadius(10)
-                            .shadow(radius: 2)
                         }
                         .padding(.vertical, 8)
                         .listRowBackground(Color.clear)
