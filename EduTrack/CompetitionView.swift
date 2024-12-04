@@ -1,93 +1,157 @@
 import SwiftUI
 
-struct Competition: Identifiable {
-    let id = UUID()
-    let title: String
-}
-
-let sampleCompetitions = [
-    Competition(title: "Go to Competitive Challenges"),
-    Competition(title: "Go to Individual Challenges")
-]
-
 struct CompetitionView: View {
-    @State private var competitions = sampleCompetitions
+    @State private var showCompetitiveChallenges = false
+    @State private var showIndividualChallenges = false
+    @State private var challenges = [
+        Challenge(
+            title: "Challenge with Lydia", description: "Limit screen time to 3 hours per day",
+            duration: "Weekly", points: 50, status: "In Progress"
+        ),
+        Challenge(
+            title: "Challenge with Muhammad", description: "No social media usage for 12 hours",
+            duration: "Daily", points: 100, status: "Pending"
+        ),
+        Challenge(
+            title: "Challenge with Jane", description: "Limit social media apps under 12 hours per week",
+            duration: "Monthly", points: 150, status: "Pending"
+        ),
+    ]
+    @State private var selectedViewTitle = ""
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
+                
                 Text("Competition")
                     .font(.system(size: 36, weight: .semibold))
                     .padding(.top, 30)
-
+                
                 Text("You can compete in challenges for more points!")
                     .font(.system(size: 14, design: .default))
                     .padding(.top, -10)
-
+                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                                .imageScale(.large)
+                                .font(.system(size: 24))
+                                .foregroundColor(.black)
+                                .padding(.top, 5)
+                            
+                            Text("7000")
+                                .font(.custom("DS-Digital", size: 24))
+                                .foregroundColor(.black)
+                            Text("pts")
+                                .font(.system(size: 18))
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SettingView()) {
+                            VStack(spacing: 2) {
+                                Image(systemName: "gearshape")
+                                    .imageScale(.large)
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.black)
+                                    .padding(.top, 25)
+                                Text("Settings")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.black)
+                                    .padding(.bottom, 5)
+                            }
+                        }
+                    }
+                }
+                
                 VStack(spacing: 15) {
-                    NavigationLink(destination: DetailView(competitionTitle: "Go to Competitive Challenges")) {
+                    // Button for Competitive Challenges
+                    Button(action: {
+                        showCompetitiveChallenges = true
+                    }) {
                         Text("Go to Competitive Challenges")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
                             .padding()
-                            .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(maxWidth: .infinity)
                             .background(Color.blue)
                             .cornerRadius(10)
                             .padding(.horizontal)
                     }
-
-                    NavigationLink(destination: DetailView(competitionTitle: "Go to Individual Challenges")) {
+                    .sheet(isPresented: $showCompetitiveChallenges) {
+                        ChallengesView(challenges: $challenges, selectedFriendName: "Competitive Challenges")
+                    }
+                    
+                    // Button for Individual Challenges
+                    Button(action: {
+                        showIndividualChallenges = true
+                    }) {
                         Text("Go to Individual Challenges")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
                             .padding()
-                            .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(maxWidth: .infinity)
                             .background(Color.blue)
                             .cornerRadius(10)
                             .padding(.horizontal)
+                    }
+                    .sheet(isPresented: $showIndividualChallenges) {
+                        IndividualChallengeView()
                     }
                 }
                 .padding(.top, 20)
 
                 Spacer()
             }
-            .padding(.vertical)
+            .padding()
         }
     }
 }
 
-struct DetailView: View {
-    let competitionTitle: String
+struct CompetitiveChallengesView: View {
     @State private var showLeaderboard = false
 
     var body: some View {
         VStack {
-            Text("\(competitionTitle) Details")
+            Text("Competitive Challenge")
                 .font(.system(size: 36, weight: .semibold))
                 .padding(.top, 30)
-
+            
             Spacer()
-
-            if competitionTitle == "Go to Competitive Challenges" {
-                Button(action: {
-                    showLeaderboard = true
-                }) {
-                    Text("Go to Leaderboard")
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
-                        .padding(.bottom, 20)
-                }
-                .sheet(isPresented: $showLeaderboard) {
-                    LeaderboardView()
-                }
+            
+            Button(action: {
+                showLeaderboard = true
+            }) {
+                Text("Go to Leaderboard")
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
+            }
+            .sheet(isPresented: $showLeaderboard) {
+                LeaderboardView()
             }
         }
-        .navigationTitle(competitionTitle)
+        .padding()
+    }
+}
+
+struct IndividualChallengesView: View {
+    var body: some View {
+        VStack {
+            Text("Individual Challenge")
+                .font(.system(size: 36, weight: .semibold))
+                .padding(.top, 30)
+            
+            Spacer()
+        }
+        .padding()
     }
 }
 
@@ -108,11 +172,12 @@ struct LeaderboardView: View {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                         .textCase(.none)
-
+                    
                     Text("Competition with Lydia")
                         .font(.system(size: 24, weight: .semibold))
                         .foregroundColor(.black)
                         .textCase(.none)
+
                 }) {
                     HStack {
                         Text("1.")
