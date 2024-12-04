@@ -52,6 +52,7 @@ let newChallengeOptions = [
 ]
 
 struct IndividualChallengeView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var totalPoints = 7000
     @State private var challenges = individualChallenges
     @State private var showChallengeSelection = false
@@ -65,7 +66,7 @@ struct IndividualChallengeView: View {
                 
                 // Main Title
                 Text("Individual Challenge")
-                    .font(.system(size: 36, weight: .semibold, design: .default))
+                    .font(.system(size: 36, weight: .semibold))
                     .padding(.top, 30)
                 Text("Challenge yourself and earn points")
                     .font(.system(size: 14, design: .default))
@@ -140,6 +141,15 @@ struct IndividualChallengeView: View {
                             Image(systemName: "plus")
                         }
                     }
+                    ToolbarItem(placement: .navigationBarLeading) { 
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                    }
                 }
                 .sheet(isPresented: $showChallengeSelection) {
                     IndividualChallengeSelectionView { selectedChallenge in
@@ -191,6 +201,7 @@ struct IndividualChallengeView: View {
         }
     }
 }
+
 
 struct IndividualChallengeSelectionView: View {
     @Environment(\.presentationMode) var presentationMode

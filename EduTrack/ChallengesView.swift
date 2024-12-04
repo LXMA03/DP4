@@ -1,7 +1,5 @@
-// Challenges UI for Application - Muhammad Khan
 import SwiftUI
 
-// Define a model for each challenge
 struct Challenge: Identifiable {
     let id = UUID()
     let title: String
@@ -104,6 +102,7 @@ struct ChallengeSelectionView: View {
 }
 
 struct ChallengesView: View {
+    @Environment(\.presentationMode) var presentationMode
     @Binding var challenges: [Challenge]
     @State private var totalPoints = 7000
     @State private var showChallengeSelection = false
@@ -116,10 +115,9 @@ struct ChallengesView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
                 // Main Title
                 Text("Competitive Challenge")
-                    .font(.system(size: 36, weight: .semibold, design: .default))
+                    .font(.system(size: 36, weight: .semibold))
                     .padding(.top, 30)
                 Text("Compete with friends and family!")
                     .font(.system(size: 14, design: .default))
@@ -191,6 +189,16 @@ struct ChallengesView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.white)
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) { 
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             showChallengeSelection = true
