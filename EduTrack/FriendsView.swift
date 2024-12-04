@@ -130,7 +130,7 @@ struct FriendsView: View {
                     Alert(
                         title: Text("No Friends Selected"),
                         message: Text("Choose a friend to compete with!"),
-                        dismissButton: .default(Text("Ok"))
+                        dismissButton: .default(Text("OK"))
                     )
                 }
                 .sheet(isPresented: $showChallengesView) {

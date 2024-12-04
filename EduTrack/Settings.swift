@@ -17,32 +17,35 @@ struct SettingView: View {
             // Option to set time limit
             NavigationLink(destination: Option1View()) {
                 Text("Set Entertainment Apps Time Limit")
-                    .font(.title2)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
-                    .foregroundColor(.white)
                     .cornerRadius(10)
+                    .padding(.horizontal)
             }
             
             NavigationLink(destination: Option2View()) {
                 Text("Contact Help Center")
-                    .font(.title2)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
-                    .foregroundColor(.white)
                     .cornerRadius(10)
+                    .padding(.horizontal)
             }
             
             NavigationLink(destination: Option3View()) {
                 Text("Set Sound Preferences")
-                    .font(.title2)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
-                    .foregroundColor(.white)
                     .cornerRadius(10)
+                    .padding(.horizontal)
             }
             
             Spacer()
@@ -51,51 +54,67 @@ struct SettingView: View {
 }
 
 struct Option1View: View {
-    // Variables
     @State private var selectedHour = 0
     @State private var selectedMin = 0
-    @State private var showConfirmation = false
-    @State private var showConfirmationHelpCenter = false
-    @State private var showConfirmationAudio = false
-    
-    // Arrays to hold the time selector
+    @State private var alertType: AlertType? = nil
+
     let hours = Array(0...23)
     let minutes = Array(0...59)
-    let seconds = Array(0...59)
-    
+
+    enum AlertType: Identifiable {
+        case noTimeSet, highTimeLimit, timeSet
+
+        var id: Int {
+            hashValue
+        }
+    }
+
     var body: some View {
         VStack(spacing: 20) {
             Text("Set Time Limit on Entertainment Apps")
-                .font(.system(size: 36, weight: .semibold, design: .default))
+                .font(.system(size: 36, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .padding(.top, 15)
-            
-            // Create pickers for hours, min, and sec
-            HStack {
-                // Hour selector
-                Picker(selection: $selectedHour, label: Text("Hour(s)")) {
-                    ForEach(hours, id: \.self) { hour in Text("\(hour)").tag(hour)
+
+            // Labels for hours and minutes with pickers
+            HStack(spacing: 20) {
+                VStack {
+                    Picker(selection: $selectedHour, label: Text("Hours")) {
+                        ForEach(hours, id: \.self) { hour in
+                            Text("\(hour)").tag(hour)
+                        }
                     }
+                    .pickerStyle(WheelPickerStyle())
+                    .frame(maxWidth: 100)
+                    
+                    Text("Hours")
+                        .font(.headline)
                 }
-                .pickerStyle(WheelPickerStyle())
-                .frame(maxWidth: 100)
-                
-                // Minute selector
-                Picker(selection: $selectedMin, label: Text("Minutes")) {
-                    ForEach(minutes, id: \.self) { minute in Text("\(minute)").tag(minute)
+
+                VStack {
+                    Picker(selection: $selectedMin, label: Text("Minutes")) {
+                        ForEach(minutes, id: \.self) { minute in
+                            Text("\(minute)").tag(minute)
+                        }
                     }
+                    .pickerStyle(WheelPickerStyle())
+                    .frame(maxWidth: 100)
+                    
+                    Text("Minutes")
+                        .font(.headline)
                 }
-                .pickerStyle(WheelPickerStyle())
-                .frame(maxWidth: 100)
-                
             }
             .padding()
-            
-            // Button to confirm the time selected
+
+            // Confirm Button
             Button(action: {
-                // Action for setting screen time
-                showConfirmation = true
-                
+                if selectedHour == 0 && selectedMin == 0 {
+                    alertType = .noTimeSet // Show no time alert
+                } else if selectedHour > 4 || (selectedHour == 4 && selectedMin > 0) {
+                    alertType = .highTimeLimit // Show high time limit alert
+                } else {
+                    alertType = .timeSet // Show time set confirmation
+                }
             }) {
                 Text("Confirm")
                     .font(.title2)
@@ -106,14 +125,29 @@ struct Option1View: View {
                     .cornerRadius(10)
             }
             .padding(.horizontal)
-            .alert(isPresented: $showConfirmation) {
-                            Alert(
-                                title: Text("Time Limit Set"),
-                                message: Text("Screen time set for \(selectedHour) hours and \(selectedMin) minutes"),
-                                dismissButton: .default(Text("OK"))
-                            )
-                        }
-            
+            .alert(item: $alertType) { alert in
+                switch alert {
+                case .noTimeSet:
+                    return Alert(
+                        title: Text("No Time Limit Set"),
+                        message: Text("Set a valid time duration"),
+                        dismissButton: .default(Text("OK"))
+                    )
+                case .highTimeLimit:
+                    return Alert(
+                        title: Text("Very High Time Limit"),
+                        message: Text("Recommend less than 4 hours"),
+                        dismissButton: .default(Text("OK"))
+                    )
+                case .timeSet:
+                    return Alert(
+                        title: Text("Time Limit Set"),
+                        message: Text("Set for \(selectedHour) hours and \(selectedMin) minutes"),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+            }
+
             Spacer()
         }
         .padding()
