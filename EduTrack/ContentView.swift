@@ -26,10 +26,10 @@ struct ContentView: View {
                 }
                 .tag(1)
 
-            CompetitionView()  // Competition Screen
+            CompetitionView()  // Challenges Screen
                 .tabItem {
                     Image(systemName: "trophy.fill")
-                    Text("Competition")
+                    Text("Challenges")
                 }
                 .tag(2)
 

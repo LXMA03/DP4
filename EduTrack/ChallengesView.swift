@@ -16,7 +16,7 @@ struct ChallengeItem: Identifiable {
     let points: Int
 }
 
-let CompetitiveChallenges = [
+let CompetitiveChallengesList1 = [
     Challenge(
         title: "Challenge with Lydia", description: "Limit screen time to 3 hours per day",
         duration: "Weekly", points: 50, status: "In Progress"),

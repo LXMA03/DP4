@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CompetitionView: View {
     @State private var showIndividualChallenges = false
+    @State private var showCompetitiveChallenges = false
     @State private var challenges = [
         Challenge(
             title: "Challenge with Lydia", description: "Limit screen time to 3 hours per day",
@@ -22,7 +23,7 @@ struct CompetitionView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 
-                Text("Competition")
+                Text("Challenges")
                     .font(.system(size: 36, weight: .semibold))
                     .padding(.top, 30)
                 
@@ -66,8 +67,10 @@ struct CompetitionView: View {
                 }
                 
                 VStack(spacing: 15) {
-                    // Navigation to FriendsView
-                    NavigationLink(destination: FriendsView()) {
+                    // Navigation to CompetitiveChallenges
+                    Button(action: {
+                        showCompetitiveChallenges = true
+                    }) {
                         Text("Go to Competitive Challenges")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
@@ -76,6 +79,9 @@ struct CompetitionView: View {
                             .background(Color.blue)
                             .cornerRadius(10)
                             .padding(.horizontal)
+                    }
+                    .sheet(isPresented: $showCompetitiveChallenges) {
+                        CompetitiveChallenges()
                     }
                     
                     // Navigation to Individual Challenges

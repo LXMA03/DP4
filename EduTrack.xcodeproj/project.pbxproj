@@ -41,6 +41,7 @@
 				Assets.xcassets,
 				ChallengesView.swift,
 				CompetitionView.swift,
+				CompetitiveChallenges.swift,
 				ContentView.swift,
 				CustomizeChallengeView.swift,
 				DP4App.swift,

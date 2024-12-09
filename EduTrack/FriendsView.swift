@@ -41,7 +41,7 @@ struct FriendsView: View {
                 Text("Friends")
                     .font(.system(size: 36, weight: .semibold, design: .default))
                     .padding(.top, 30)
-                Text("Compete with friends and try out new challenges!")
+                Text("Try out new challenges with your friends!")
                     .font(.system(size: 14, design: .default))
                     .padding(.top, -10)
                 
@@ -116,7 +116,7 @@ struct FriendsView: View {
                         showAlert = true
                     }
                 }) {
-                    Text("Go to Challenges")
+                    Text("Challenge")
                         .font(.headline)
                         .padding()
                         .frame(maxWidth: .infinity)
@@ -135,9 +135,6 @@ struct FriendsView: View {
                 }
                 .sheet(isPresented: $showChallengesView) {
                     ChallengesView(challenges: $challenges, selectedFriendName: selectedFriendName)
-                }
-                .sheet(isPresented: $showIndividualChallengeView) {
-                    IndividualChallengeView()
                 }
             }
         }
