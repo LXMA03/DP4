@@ -129,8 +129,8 @@ struct Option1View: View {
                 switch alert {
                 case .noTimeSet:
                     return Alert(
-                        title: Text("No Time Limit Set"),
-                        message: Text("Set a valid time duration"),
+                        title: Text("Time Limit Set"),
+                        message: Text("Warning: Set for 0 hours and 0 minutes"),
                         dismissButton: .default(Text("OK"))
                     )
                 case .highTimeLimit:

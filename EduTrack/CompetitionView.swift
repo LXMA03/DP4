@@ -26,7 +26,7 @@ struct CompetitionView: View {
                     .font(.system(size: 36, weight: .semibold))
                     .padding(.top, 30)
                 
-                Text("You can compete in challenges for more points!")
+                Text("You can complete challenges for more points!")
                     .font(.system(size: 14, design: .default))
                     .padding(.top, -10)
                 
