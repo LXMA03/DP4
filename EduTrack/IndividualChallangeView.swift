@@ -10,21 +10,21 @@ import SwiftUI
 // Sample Data for Individual Challenges
 let individualChallenges = [
     Challenge(
-        title: "Challenge 1",
+        title: "Duolingo Challenge",
         description: "Learn new language using Duolingo for 24 hours",
         duration: "Weekly",
         points: 60,
         status: "In Progress"
     ),
     Challenge(
-        title: "Challenge 2",
+        title: "Quizlet Challenge",
         description: "Study using Quizlet for 30 hours",
         duration: "Weekly",
         points: 100,
         status: "Completed"
     ),
     Challenge(
-        title: "Challenge 3",
+        title: "Kindle Challenge",
         description: "Read books using Kindle for 50 hours",
         duration: "Monthly",
         points: 150,

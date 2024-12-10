@@ -3,26 +3,14 @@ import SwiftUI
 struct CompetitionView: View {
     @State private var showIndividualChallenges = false
     @State private var showCompetitiveChallenges = false
-    @State private var challenges = [
-        Challenge(
-            title: "Challenge with Lydia", description: "Limit screen time to 3 hours per day",
-            duration: "Weekly", points: 50, status: "In Progress"
-        ),
-        Challenge(
-            title: "Challenge with Muhammad", description: "No social media usage for 12 hours",
-            duration: "Daily", points: 100, status: "Pending"
-        ),
-        Challenge(
-            title: "Challenge with Jane", description: "Limit social media apps under 12 hours per week",
-            duration: "Monthly", points: 150, status: "Pending"
-        ),
+    @State private var pendingChallenges = [
+        PendingChallenge(sender: "Jane", description: "Reading books for 40 hours", duration: "Weekly", points: 100),
+        PendingChallenge(sender: "Cynthia", description: "Studying Quizlet for 5 hours", duration: "Daily", points: 50)
     ]
-    @State private var selectedViewTitle = ""
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                
                 Text("Challenges")
                     .font(.system(size: 36, weight: .semibold))
                     .padding(.top, 30)
@@ -67,7 +55,6 @@ struct CompetitionView: View {
                 }
                 
                 VStack(spacing: 15) {
-                    // Navigation to CompetitiveChallenges
                     Button(action: {
                         showCompetitiveChallenges = true
                     }) {
@@ -84,7 +71,6 @@ struct CompetitionView: View {
                         CompetitiveChallenges()
                     }
                     
-                    // Navigation to Individual Challenges
                     Button(action: {
                         showIndividualChallenges = true
                     }) {
@@ -102,121 +88,68 @@ struct CompetitionView: View {
                     }
                 }
                 .padding(.top, 20)
-
+                
+                Divider()
+                    .padding(.vertical, 20)
+                
+                Text("Pending Challenges")
+                    .font(.system(size: 24, weight: .semibold))
+                    .padding(.bottom, 10)
+                
+                List {
+                    ForEach($pendingChallenges) { $challenge in
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("\(challenge.sender) has requested a challenge")
+                                    .font(.headline)
+                                Text(challenge.description)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                Text("Duration: \(challenge.duration)")
+                                    .font(.footnote)
+                                    .foregroundColor(.blue)
+                                Text("Points: \(challenge.points)")
+                                    .font(.footnote)
+                                    .foregroundColor(.orange)
+                            }
+                            Spacer()
+                            Button(action: {
+                                acceptChallenge(challenge)
+                            }) {
+                                Text("Accept")
+                                    .font(.headline)
+                                    .padding(8)
+                                    .frame(width: 80)
+                                    .background(Color.green)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(8)
+                            }
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+                .listStyle(InsetGroupedListStyle())
+                .frame(maxHeight: 250) // Limit list height for pending challenges
+                
                 Spacer()
             }
             .padding()
         }
     }
-}
-
-struct CompetitiveChallengesView: View {
-    @State private var showLeaderboard = false
-
-    var body: some View {
-        VStack {
-            Text("Competitive Challenge")
-                .font(.system(size: 36, weight: .semibold))
-                .padding(.top, 30)
-            
-            Spacer()
-            
-            Button(action: {
-                showLeaderboard = true
-            }) {
-                Text("Go to Leaderboard")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                    .padding(.bottom, 20)
-            }
-            .sheet(isPresented: $showLeaderboard) {
-                LeaderboardView()
-            }
+    
+    private func acceptChallenge(_ challenge: PendingChallenge) {
+        if let index = pendingChallenges.firstIndex(where: { $0.id == challenge.id }) {
+            pendingChallenges.remove(at: index)
         }
-        .padding()
     }
 }
 
-struct IndividualChallengesView: View {
-    var body: some View {
-        VStack {
-            Text("Individual Challenge")
-                .font(.system(size: 36, weight: .semibold))
-                .padding(.top, 30)
-            
-            Spacer()
-        }
-        .padding()
-    }
-}
-
-struct LeaderboardView: View {
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("Leaderboard")
-                .font(.system(size: 36, weight: .semibold))
-                .padding(.top, 30)
-
-            List {
-                Section(header: VStack(alignment: .leading) {
-                    Text("In Progress")
-                        .font(.system(size: 14, weight: .semibold))
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        .textCase(.none)
-                    
-                    Text("Competition with Lydia")
-                        .font(.system(size: 24, weight: .semibold))
-                        .foregroundColor(.black)
-                        .textCase(.none)
-
-                }) {
-                    HStack {
-                        Text("1.")
-                            .font(.system(size: 20))
-                        Text("Lydia")
-                            .font(.system(size: 20, weight: .bold))
-                            .padding(.leading, 5)
-                        Spacer()
-                        Text("Winning")
-                            .font(.system(size: 12, weight: .semibold))
-                            .padding(.vertical, 4)
-                            .padding(.horizontal, 8)
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                    .padding(.leading, 20)
-
-                    HStack {
-                        Text("2.")
-                            .font(.system(size: 20))
-                        Text("John")
-                            .font(.system(size: 20))
-                            .padding(.leading, 5)
-                    }
-                    .padding(.leading, 20)
-                }
-                .padding(.top, 10)
-                .padding(.bottom, 7)
-                .padding(.leading, -30)
-            }
-            .listStyle(InsetGroupedListStyle())
-            .scrollContentBackground(.hidden)
-            .background(Color.white)
-
-            Spacer()
-        }
-        .padding()
-    }
+struct PendingChallenge: Identifiable {
+    let id = UUID()
+    let sender: String
+    let description: String
+    let duration: String
+    let points: Int
 }
 
 struct CompetitionView_Previews: PreviewProvider {
