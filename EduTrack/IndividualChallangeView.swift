@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// Sample Data for Individual Challenges
 let individualChallenges = [
     Challenge(
         title: "Duolingo Challenge",
@@ -32,7 +31,6 @@ let individualChallenges = [
     )
 ]
 
-// Sample Data for New Challenge Options
 let newChallengeOptions = [
     ChallengeItem(
         title: "Limit screen time to 4 hours per day",
@@ -55,30 +53,22 @@ struct IndividualChallengeView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var totalPoints = 7000
     @State private var challenges = individualChallenges
-    @State private var availableChallenges = [
-        ChallengeItem(title: "Limit screen time to 4 hours per day", label: "Weekly",
-                points: 80),
-        ChallengeItem(title: "Study using Quizlet for 40 hours", label: "Weekly", points: 300),
-        ChallengeItem(title: "Study using Google PowerPoint for 1 hour per day", label: "Monthly", points: 400)
-    ]
+    @State private var availableChallenges = newChallengeOptions
     @State private var showChallengeSelection = false
     @State private var showCustomizeChallenge = false
     @State private var showDeleteConfirmation = false
     @State private var challengeToDelete: Challenge? = nil
-    @State private var nextChallengeNumber = 4
 
     var body: some View {
         NavigationView {
             VStack {
-                // Main Title
                 Text("Individual Challenge")
                     .font(.system(size: 36, weight: .semibold))
                     .padding(.top, 30)
                 Text("Challenge yourself and earn points!")
-                    .font(.system(size: 14, design: .default))
+                    .font(.system(size: 14))
                     .padding(.top, -10)
-                
-                // Current Points Section
+
                 HStack {
                     Spacer()
                     Text("Current Points:")
@@ -91,50 +81,17 @@ struct IndividualChallengeView: View {
                 }
                 .padding()
 
-                // List of Challenges
                 List {
                     ForEach(challenges) { challenge in
-                        VStack(spacing: 8) {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text(challenge.title)
-                                        .font(.system(size: 24, weight: .bold))
-                                    Text(challenge.description)
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    Text("Duration: \(challenge.duration)")
-                                        .font(.footnote)
-                                        .foregroundColor(.blue)
-                                }
-                                Spacer()
-                                VStack(alignment: .center) {
-                                    Text("\(challenge.points) pts")
-                                        .font(.caption)
-                                        .padding(6)
-                                        .background(Color.yellow)
-                                        .cornerRadius(8)
-                                    Text(challenge.status)
-                                        .font(.caption2)
-                                        .padding(6)
-                                        .background(statusColor(status: challenge.status))
-                                        .foregroundColor(.white)
-                                        .cornerRadius(8)
+                        ChallengeRowView(challenge: challenge)
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    challengeToDelete = challenge
+                                    showDeleteConfirmation = true
+                                } label: {
+                                    Text("Delete")
                                 }
                             }
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                        }
-                        .padding(.vertical, 8)
-                        .listRowBackground(Color.clear)
-                        .swipeActions {
-                            Button(role: .destructive) {
-                                challengeToDelete = challenge
-                                showDeleteConfirmation = true
-                            } label: {
-                                Text("Delete")
-                            }
-                        }
                     }
                 }
                 .scrollContentBackground(.hidden)
@@ -175,11 +132,11 @@ struct IndividualChallengeView: View {
                     }
                 }
                 .sheet(isPresented: $showCustomizeChallenge) {
-                    CustomizeChallengeView(challenges: $availableChallenges) {
-                        showCustomizeChallenge = false
-                        showChallengeSelection = true
+                    CustomizeChallengeView(challenges: availableChallenges) { title, description, points, duration in
+                        addCustomizedChallenge(title: title, description: description, points: points, duration: duration)
                     }
                 }
+
                 .alert(isPresented: $showDeleteConfirmation) {
                     Alert(
                         title: Text("Deleting Challenge"),
@@ -196,22 +153,77 @@ struct IndividualChallengeView: View {
     }
 
     private func addSelectedChallenge(_ challenge: ChallengeItem) {
+        let titleMap: [String: String] = [
+            "Limit screen time to 4 hours per day": "Screen Time Challenge",
+            "Study using Quizlet for 40 hours": "Quizlet Challenge",
+            "Study using Google PowerPoint for 1 hour per day": "Google PPT Challenge"
+        ]
+        let title = titleMap[challenge.title] ?? "New Challenge"
         let newChallenge = Challenge(
-            title: "Challenge \(nextChallengeNumber)",
+            title: title,
             description: challenge.title,
             duration: challenge.label,
             points: challenge.points,
             status: "In Progress"
         )
         challenges.append(newChallenge)
-        nextChallengeNumber += 1
     }
-    
+
+    private func addCustomizedChallenge(title: String, description: String, points: Int, duration: String) {
+        let newChallenge = Challenge(
+            title: title,
+            description: description,
+            duration: duration,
+            points: points,
+            status: "In Progress"
+        )
+        challenges.append(newChallenge)
+    }
+
     private func deleteChallenge() {
         if let challengeToDelete = challengeToDelete,
            let index = challenges.firstIndex(where: { $0.id == challengeToDelete.id }) {
             challenges.remove(at: index)
         }
+    }
+}
+
+struct ChallengeRowView: View {
+    let challenge: Challenge
+
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(challenge.title)
+                        .font(.system(size: 24, weight: .bold))
+                    Text(challenge.description)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Text("Duration: \(challenge.duration)")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                }
+                Spacer()
+                VStack(alignment: .center) {
+                    Text("\(challenge.points) pts")
+                        .font(.caption)
+                        .padding(6)
+                        .background(Color.yellow)
+                        .cornerRadius(8)
+                    Text(challenge.status)
+                        .font(.caption2)
+                        .padding(6)
+                        .background(statusColor(status: challenge.status))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+        }
+        .padding(.vertical, 8)
     }
 
     private func statusColor(status: String) -> Color {
@@ -222,71 +234,6 @@ struct IndividualChallengeView: View {
             return Color.orange
         default:
             return Color.gray
-        }
-    }
-}
-
-struct IndividualChallengeSelectionView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @State private var challenges = newChallengeOptions
-    @State private var selectedChallenge: ChallengeItem? = nil
-    var onConfirm: (ChallengeItem) -> Void
-
-    var body: some View {
-        VStack {
-            NavigationStack {
-                List($challenges) { $challenge in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(challenge.title)
-                                .font(.body)
-                                .padding(.vertical, 5)
-                            Text(challenge.label)
-                                .font(.caption)
-                                .foregroundColor(.blue)
-                        }
-                        Spacer()
-                        Text("\(challenge.points) pts")
-                            .font(.caption)
-                            .padding(6)
-                            .background(Color.yellow)
-                            .cornerRadius(8)
-                        Image(systemName: selectedChallenge?.id == challenge.id ? "checkmark.circle.fill" : "circle")
-                            .foregroundColor(selectedChallenge?.id == challenge.id ? .blue : .gray)
-                            .onTapGesture {
-                                if selectedChallenge?.id == challenge.id {
-                                    selectedChallenge = nil
-                                } else {
-                                    selectedChallenge = challenge
-                                }
-                            }
-                    }
-                    .contentShape(Rectangle())
-                    .listRowBackground(Color.white)
-                }
-                .navigationBarTitle("Select a Challenge", displayMode: .inline)
-                .navigationBarItems(leading: Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
-                })
-            }
-            
-            Button(action: {
-                if let selectedChallenge = selectedChallenge {
-                    onConfirm(selectedChallenge)
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }) {
-                Text("Confirm")
-                    .font(.title2)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-            }
-            .padding(.bottom, 20)
-            .disabled(selectedChallenge == nil)
         }
     }
 }

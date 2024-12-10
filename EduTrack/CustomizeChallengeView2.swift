@@ -1,21 +1,21 @@
 //
-//  CustomizeChallengeView.swift
+//  CustomizeChallengeView2.swift
 //  EduTrack
 //
-//  Created by Jane Bae on 12/4/24.
+//  Created by Wendy Bae on 12/9/24.
 //
 
 import SwiftUI
 
-struct CustomizeChallengeView: View {
-    var challenges: [ChallengeItem]
-    var onConfirm: (String, String, Int, String) -> Void
-    @Environment(\.presentationMode) var presentationMode
+struct CustomizeChallengeView2: View {
+    @Binding var challenges: [ChallengeItem]
+    var onComplete: () -> Void
+    
     @State private var title: String = ""
     @State private var description: String = ""
     @State private var duration: String = "Daily"
     @State private var points: Int = 50
-
+    
     let durations = ["Daily", "Weekly", "Monthly"]
     let pointOptions = [50, 70, 100]
 
@@ -64,29 +64,40 @@ struct CustomizeChallengeView: View {
 
                 Spacer()
 
-                Button(action: {
-                    onConfirm(title, description, points, duration)
-                    presentationMode.wrappedValue.dismiss()
-                }) {
+                Button(action: addCustomChallenge) {
                     Text("Confirm")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(title.isEmpty || description.isEmpty ? Color.gray : Color.blue)
+                        .background(Color.blue)
                         .cornerRadius(10)
                         .padding(.horizontal)
                 }
-                .disabled(title.isEmpty || description.isEmpty)
             }
             .navigationBarTitle("Customize a Challenge", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
-                        presentationMode.wrappedValue.dismiss()
+                        onComplete()
                     }
                 }
             }
         }
+    }
+
+    private func addCustomChallenge() {
+        guard !title.isEmpty, !description.isEmpty else {
+            return
+        }
+
+        let newChallenge = ChallengeItem(
+            title: title,
+            label: duration,
+            points: points
+        )
+        
+        challenges.append(newChallenge)
+        onComplete()
     }
 }

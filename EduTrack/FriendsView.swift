@@ -27,7 +27,6 @@ struct FriendsView: View {
             Challenge(title: "Challenge with Jane", description: "Limit social media apps under 12 hours per week", duration: "Monthly", points: 150, status: "Pending"),
     ]
     
-    // ChallengesView
     @State private var showChallengesView = false
     @State private var selectedFriendName = ""
     @State private var showIndividualChallengeView = false

@@ -44,6 +44,7 @@
 				CompetitiveChallenges.swift,
 				ContentView.swift,
 				CustomizeChallengeView.swift,
+				CustomizeChallengeView2.swift,
 				DP4App.swift,
 				FriendsView.swift,
 				HomeView.swift,

@@ -153,7 +153,7 @@ struct ChallengesView: View {
     }
 
     private func customizeChallengeSheet() -> some View {
-        CustomizeChallengeView(challenges: $availableChallenges) {
+        CustomizeChallengeView2(challenges: $availableChallenges) {
             showCustomizeChallenge = false
             showChallengeSelection = true
         }
@@ -232,12 +232,11 @@ struct ChallengesView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.white)
                 .toolbar {
-                    // Leading Toolbar Item
+
                     ToolbarItem(placement: .navigationBarLeading) {
                         dismissButton
                     }
 
-                    // Trailing Toolbar Menu
                     ToolbarItem(placement: .navigationBarTrailing) {
                         challengeMenu
                     }
